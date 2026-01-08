@@ -1,39 +1,46 @@
 import React from "react";
+
 import Title from "../Components/ui/Title";
-import ServiseCard from "../Components/ui/ServiseCard";
 import Header from "../Components/ui/Header";
+import ServiseCard from "../Components/ui/ServiseCard";
+
 import ImageDivider from "../assets/Group 1 (1).png";
 import { service } from "../data/data";
+
 export default function Sectors() {
   return (
     <section
-      className="flex flex-col items-center justify-center text-center"
       dir="rtl"
+      className="flex flex-col items-center justify-center text-center"
     >
-      <Title title={"القطاعات"} />
+      {/* Page Title */}
+      <Title title="القطاعات" />
 
-      <div className="container  mx-auto max-w-7xl flex flex-col items-center justify-center">
-        <Header title={"قطاعات اعمالنا"}>
-          نعمل عبر مجموعة من القطاعات الحيوية من خلال نموذج تشغيلي
-          <br /> موحد يضمن الكفاءة والاستدامة في جميع انشطتنا
+      <div className="container mx-auto max-w-7xl flex flex-col items-center gap-12">
+        {/* Section Header */}
+        <Header title="قطاعات أعمالنا">
+          نعمل عبر مجموعة من القطاعات الحيوية من خلال نموذج تشغيلي موحد يضمن
+          الكفاءة والاستدامة في جميع أنشطتنا
         </Header>
 
-        <div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5
- "
-        >
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {service.map((item) => (
             <ServiseCard key={item.id} item={item} />
           ))}
         </div>
 
-        <Header title="كيف ندير عملنا">
-          نعتمد على نموذج تشغيلي موحد يضمن الكفاءة والجودة في إدارة جميع
-          قطاعاتنا، مع تخصيص
-          <br /> فرق متخصصة لكل قطاع وفق أفضل الممارسات.{" "}
-        </Header>
-
-        <img src={ImageDivider} alt="" className="scale-70" />
+        <div className="flex flex-col items-center gap-6 ">
+          <Header title="كيف ندير عملنا">
+            نعتمد على نموذج تشغيلي موحد يضمن الكفاءة والجودة في إدارة جميع
+            قطاعاتنا، مع تخصيص فرق متخصصة لكل قطاع وفق أفضل الممارسات.
+          </Header>
+          <img
+            src={ImageDivider}
+            alt="نموذج إدارة العمل"
+            className="scale-75 "
+          />
+        </div>
       </div>
     </section>
   );
