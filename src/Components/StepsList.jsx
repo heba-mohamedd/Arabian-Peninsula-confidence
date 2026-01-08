@@ -4,7 +4,7 @@ import CircleCard from "./ui/CircleCard";
 
 export default function StepsList() {
   return (
-    <div className="flex gap-2">
+    <div className="grid grid-cols-2 md:grid-cols-5">
       {Data_Steps.map((step, index) => (
         <CircleCard
           key={index}
