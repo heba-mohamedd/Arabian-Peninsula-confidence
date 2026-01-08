@@ -1,30 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
+import logo1 from "../assets/ourClients/Logo (1).png";
+import logo2 from "../assets/ourClients/Logo (2).png";
+import logo3 from "../assets/ourClients/Logo (3).png";
+import logo4 from "../assets/ourClients/Logo (4).png";
+import logo5 from "../assets/ourClients/Logo (5).png";
+import logo6 from "../assets/ourClients/Logo (6).png";
+import logo7 from "../assets/ourClients/Logo (7).png";
+import logo8 from "../assets/ourClients/Logo.png";
 
-const logos = [
-  "src/assets/ourClients/Logo (1).png",
-  "src/assets/ourClients/Logo (2).png",
-  "src/assets/ourClients/Logo (3).png",
-  "src/assets/ourClients/Logo (4).png",
-  "src/assets/ourClients/Logo (5).png",
-  "src/assets/ourClients/Logo (6).png",
-  "src/assets/ourClients/Logo (7).png",
-  "src/assets/ourClients/Logo.png",
-];
+const logos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8];
 
 export default function Clients() {
-  // إعدادات الحاوية الكبيرة (لتنسيق توقيت ظهور الأبناء)
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1, // الفرق الزمني بين ظهور كل شعار والآخر
+        staggerChildren: 0.1,
       },
     },
   };
 
-  // إعدادات كل شعار على حدة
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
@@ -33,7 +30,6 @@ export default function Clients() {
   return (
     <section className="py-16 overflow-hidden" dir="rtl">
       <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        {/* العنوان مع حركة ظهور بسيطة */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           whileInView={{ opacity: 1, y: 0 }}
