@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Dropdown, Space } from "antd";
 import { GlobalOutlined, DownOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import logo from "../assets/Logo.png";
 
 const Navbar = () => {
+  const [isClick, setIsClick] = useState("الرئيسية");
   const items = [
     { key: "1", label: "English" },
     { key: "2", label: "العربية" },
@@ -33,7 +34,10 @@ const Navbar = () => {
           <li key={index} className="flex items-center gap-2">
             <NavLink
               to={link.href}
-              className="hover:text-green-600 transition-colors"
+              onClick={() => setIsClick(link.name)}
+              className={`hover:text-[#00963F] transition-colors  ${
+                isClick === link.name ? "text-[#00963F]" : ""
+              } `}
             >
               {link.name}
             </NavLink>

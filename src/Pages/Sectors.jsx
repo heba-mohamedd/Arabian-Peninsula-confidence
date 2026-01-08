@@ -2,8 +2,8 @@ import React from "react";
 import Title from "../Components/ui/Title";
 import ServiseCard from "../Components/ui/ServiseCard";
 import Header from "../Components/ui/Header";
-import { service } from "../constant/constant";
 import ImageDivider from "../assets/Group 1 (1).png";
+import { service } from "../data/data";
 export default function Sectors() {
   return (
     <section
