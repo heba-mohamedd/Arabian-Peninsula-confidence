@@ -5,29 +5,34 @@ import footerimage from "../assets/236627169d5a53522a3134e218015a0810d64acb.png"
 export default function Footer() {
   const [isOpened, setIsOpend] = useState(true);
   return (
-    <footer className="bg-secondary  text-[#B8B8B8]" dir="rtl">
+    <footer className="bg-secondary  text-[#B8B8B8] mt-10" dir="rtl">
       <div
-        className="bg-white border-4 border-primary rounded-full w-17.5 h-17.5 
-                flex items-center justify-center mx-auto relative -top-7.5"
+        className="bg-white border-4 border-primary rounded-full w-16 sm:w-17.5 h-16 sm:h-17.5 
+                flex items-center justify-center mx-auto relative -top-6 sm:-top-7.5 cursor-pointer transition-transform hover:scale-110 z-10"
         onClick={() => setIsOpend((prev) => !prev)}
       >
         {isOpened ? (
-          <IoIosArrowDown size={25} color="#00963F" />
+          <IoIosArrowDown size={24} color="#00963F" />
         ) : (
-          <IoIosArrowUp size={25} color="#00963F" />
+          <IoIosArrowUp size={24} color="#00963F" />
         )}
       </div>
       {isOpened && (
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 py-10">
-          <img src={footerimage} alt="logo" className="w-full max-w-62.5" />
+        <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-8 md:py-10 px-4 md:px-0">
+          <div className="flex justify-center sm:justify-start">
+            <img
+              src={footerimage}
+              alt="logo"
+              className="w-full max-w-48 sm:max-w-56 md:max-w-62.5"
+            />
+          </div>
 
           <div>
-            <div className="text-2xl mb-4 text-primary flex items-center gap-2">
-              <IoAlbumsOutline />
-
+            <div className="text-lg sm:text-xl md:text-2xl mb-4 text-primary flex items-center gap-2">
+              <IoAlbumsOutline className="flex-shrink-0" />
               <p>الخدمات</p>
             </div>
-            <ul className="space-y-2 list-disc  pr-5">
+            <ul className="space-y-2 list-disc pr-5 text-sm md:text-base">
               <li>إدارة المرافق</li>
               <li>تكامل الأنظمة</li>
               <li>الحلول الذكية</li>
@@ -36,12 +41,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="text-2xl mb-4 text-primary flex items-center gap-2">
-              <IoAlbumsOutline />
-
+            <div className="text-lg sm:text-xl md:text-2xl mb-4 text-primary flex items-center gap-2">
+              <IoAlbumsOutline className="flex-shrink-0" />
               <p>القطاعات</p>
             </div>
-            <ul className="space-y-2 list-disc pr-5">
+            <ul className="space-y-2 list-disc pr-5 text-sm md:text-base">
               <li>الجهات الحكومية</li>
               <li>المستشفيات</li>
               <li>المنشآت الصناعية</li>
@@ -50,11 +54,11 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="text-2xl mb-4 text-primary flex items-center gap-2">
-              <IoAlbumsOutline />
+            <div className="text-lg sm:text-xl md:text-2xl mb-4 text-primary flex items-center gap-2">
+              <IoAlbumsOutline className="flex-shrink-0" />
               <p>تواصل معنا</p>
             </div>
-            <ul className="space-y-2 list-disc  pr-5">
+            <ul className="space-y-2 list-disc pr-5 text-sm md:text-base">
               <li>من نحن</li>
               <li>مساعدة</li>
             </ul>
@@ -62,8 +66,8 @@ export default function Footer() {
         </div>
       )}
 
-      <div className="bg-primary py-4">
-        <p className="text-center">
+      <div className="bg-primary py-3 md:py-4">
+        <p className="text-center text-white text-xs sm:text-sm md:text-base px-4">
           الالتزام بالأنظمة واللوائح المعتمدة في المملكة
         </p>
       </div>

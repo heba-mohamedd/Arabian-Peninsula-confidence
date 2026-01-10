@@ -14,7 +14,7 @@ export default function Title({ title }) {
         <div className="flex items-center gap-2 text-xl pointer-events-auto px-12">
           <button
             onClick={() => navigate("/")}
-            className="text-gray-500 bg-transparent border-none p-0 cursor-pointer"
+            className="text-dark-grey bg-transparent border-none p-0 cursor-pointer"
           >
             الرئيسية
           </button>

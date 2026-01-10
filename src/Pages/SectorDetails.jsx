@@ -26,17 +26,11 @@ export default function SectorDetails() {
 
       <div className="container max-w-6xl mx-auto px-6 flex flex-col items-center my-10">
         {/* Image */}
-        <div className="w-full">
-          <img
-            src={frame11}
-            alt={sector.title}
-            className="rounded-3xl w-full h-62.5 md:h-75 object-cover"
-          />
-        </div>
+        <img src={frame11} alt={sector.title} />
 
         {/* Header */}
         <div className="w-full text-center space-y-6 mb-12">
-          <Header title={sector.title}>{sector.description}</Header>
+          <Header title={sector.title} description={sector.description} />
 
           <div className="flex justify-center">
             <PrimaryButton

@@ -1,33 +1,57 @@
-import bgImage from "../assets/Frame 40 (1).png";
+import bgImage from "../assets/card.png";
 import PrimaryButton from "./ui/PrimaryButton";
+
 export default function RequestQuote({
   title = "",
-  description,
+  description = "",
   buttonText,
   buttonIcon,
-  containerHeight = "250px",
 }) {
   return (
-    <section
-      className="relative container mx-auto "
-      style={{ height: containerHeight }}
-    >
-      <img
-        src={bgImage}
-        alt="Decorative"
-        className="absolute inset-0 w-full h-full object-cover z-0 rounded-3xl"
-      />
-
+    <section className="container mx-auto my-10 px-4">
       <div
-        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                  w-[70%] flex flex-col justify-center items-center text-white text-center z-10"
+        className="
+          relative
+          rounded-3xl
+          overflow-hidden
+          min-h-[250px]
+          flex items-center justify-center
+        "
+        style={{
+          backgroundImage: `url(${bgImage})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        <p className="text-2xl font-semibold">{title}</p>
-        <p className="font-normal md:text-lg leading-relaxed my-4 whitespace-pre-line">
-          {description}
-        </p>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
 
-        <PrimaryButton text={buttonText} icon={buttonIcon} />
+        {/* Content */}
+        <div
+          className="
+            relative z-10
+            text-center text-white
+            max-w-2xl
+            px-6 py-10
+            flex flex-col items-center
+          "
+        >
+          {title && (
+            <h2 className="text-xl sm:text-2xl md:text-3xl ">{title}</h2>
+          )}
+
+          {description && (
+            <p className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed">
+              {description}
+            </p>
+          )}
+
+          {buttonText && (
+            <div className="mt-6">
+              <PrimaryButton text={buttonText} icon={buttonIcon} />
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

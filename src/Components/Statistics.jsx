@@ -8,7 +8,7 @@ export default function Statistics() {
       id: 1,
       value: "100",
       label: "مشاريع متعددة القطاعات",
-      pos: "top-[40%] right-[40%] md:right-[43%]",
+      pos: "top-[35%] right-[40%] md:right-[43%]",
     },
     {
       id: 2,
@@ -20,7 +20,7 @@ export default function Statistics() {
       id: 3,
       value: "100",
       label: "مشاريع متعددة القطاعات",
-      pos: "top-[55%] right-[70%] md:right-[75%]",
+      pos: "top-[45%] right-[70%] md:right-[75%]",
     },
   ];
 
@@ -56,10 +56,10 @@ function StatCard({ value, label, pos, delay }) {
       transition={{ duration: 0.6, delay }}
       className={`absolute flex flex-col md:flex-row items-center md:items-start gap-2 text-white ${pos}`}
     >
-      <div className="flex justify-between items-center gap-5">
+      <div className="flex justify-between items-center gap-3">
         <FaSquare
           size={15}
-          className="text-[#20C766] text-[10px] mt-2 md:mt-4 shadow-[0_0_10px_#20C766]"
+          className="text-primary text-[10px] mt-2 md:mt-4 shadow-[0_0_10px_#20C766]"
         />
 
         <div className="flex flex-col items-center">
@@ -69,7 +69,7 @@ function StatCard({ value, label, pos, delay }) {
           </span>
         </div>
 
-        <p className="text-[10px] md:text-lg font-medium whitespace-nowrap text-white/90 mt-1">
+        <p className="text-[10px] md:text-lg  whitespace-nowrap text-white mt-1">
           {label}
         </p>
       </div>

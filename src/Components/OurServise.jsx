@@ -35,18 +35,26 @@ const containerVariants = {
 
 export default function OurService() {
   return (
-    <section className="py-16 overflow-hidden mx-auto" dir="rtl">
-      <div className=" flex flex-col justify-center items-center">
-        <Title level={2}>القطاعات التي نخدمها</Title>
-        <p className="text-gray-700 text-lg text-center py-4">
+    <section
+      className="container  max-w-7xl py-12 md:py-16 lg:py-20 overflow-hidden mx-auto"
+      dir="rtl"
+    >
+      <div className="flex flex-col justify-center items-center px-4 sm:px-6 md:px-0">
+        <Title
+          level={2}
+          className="text-2xl sm:text-3xl md:text-4xl text-center"
+        >
+          القطاعات التي نخدمها
+        </Title>
+        <p className="text-dark-grey text-sm sm:text-base md:text-lg text-center py-3 md:py-4 max-w-3xl">
           نقدم حلولنا لعدة قطاعات حيوية، مع مراعاة متطلبات التشغيل والأنظمة
-          <br />
+          <br className="hidden md:block" />
           الخاصة بكل قطاع.
         </p>
       </div>
-      <div className="container mx-auto lg:px-20">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-center"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12 items-center"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

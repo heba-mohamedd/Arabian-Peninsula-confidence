@@ -18,10 +18,13 @@ export default function Sectors() {
 
       <div className="container mx-auto max-w-7xl flex flex-col items-center gap-12">
         {/* Section Header */}
-        <Header title="قطاعات أعمالنا">
+        <Header
+          title="قطاعات أعمالنا"
+          description="
           نعمل عبر مجموعة من القطاعات الحيوية من خلال نموذج تشغيلي موحد يضمن
           الكفاءة والاستدامة في جميع أنشطتنا
-        </Header>
+          "
+        />
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
@@ -31,10 +34,11 @@ export default function Sectors() {
         </div>
 
         <div className="flex flex-col items-center gap-6 ">
-          <Header title="كيف ندير عملنا">
-            نعتمد على نموذج تشغيلي موحد يضمن الكفاءة والجودة في إدارة جميع
-            قطاعاتنا، مع تخصيص فرق متخصصة لكل قطاع وفق أفضل الممارسات.
-          </Header>
+          <Header
+            title="كيف ندير عملنا"
+            description=" نعتمد على نموذج تشغيلي موحد يضمن الكفاءة والجودة في إدارة جميع
+            قطاعاتنا، مع تخصيص فرق متخصصة لكل قطاع وفق أفضل الممارسات."
+          />
           <img
             src={ImageDivider}
             alt="نموذج إدارة العمل"

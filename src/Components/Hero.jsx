@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import heroBg from "../assets/c142ba00b5a85693796f1962ee5405f314913329.jpg";
+import heroBg from "../assets/bms-main.jpg";
 
 const textContainer = {
   hidden: {},
@@ -18,7 +18,7 @@ const textItem = {
 
 export default function Hero() {
   return (
-    <section className="relative h-125 md:h-150 w-full overflow-hidden font-sans">
+    <section className="relative h-80 sm:h-96 md:h-125 lg:h-150 w-full overflow-hidden font-sans">
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -52,7 +52,7 @@ export default function Hero() {
       </motion.div>
 
       <motion.div
-        className="relative z-20 container mx-auto h-full flex flex-col justify-center items-end px-6 md:px-20 text-white text-right"
+        className="relative z-20 container mx-auto h-full flex flex-col justify-center items-end px-4 sm:px-6 md:px-12 lg:px-20 text-white text-right"
         variants={textContainer}
         initial="hidden"
         animate="visible"
@@ -60,15 +60,15 @@ export default function Hero() {
         <div className="max-w-2xl">
           <motion.h1
             variants={textItem}
-            className="text-2xl md:text-5xl font-bold mb-6 leading-tight"
+            className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight"
           >
-            حلول متكاملة لإدارة وتشغيل <br />
+            حلول متكاملة لإدارة وتشغيل <br className="hidden sm:block" />
             المرافق والأنظمة
           </motion.h1>
 
           <motion.p
             variants={textItem}
-            className="text-lg md:text-xl font-light leading-relaxed opacity-90"
+            className="text-sm sm:text-base md:text-lg lg:text-xl font-light leading-relaxed opacity-90"
           >
             نقدم خدمات متخصصة تشمل إدارة المرافق، تكامل الأنظمة، التشغيل
             <br className="hidden md:block" />
