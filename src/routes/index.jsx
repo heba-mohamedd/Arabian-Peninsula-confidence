@@ -3,7 +3,7 @@ import Layout from "../Layout/Layout";
 import Home from "../Pages/Home";
 import Sectors from "../Pages/Sectors";
 import SectorDetails from "../Pages/SectorDetails";
-import Financial from "../Pages/Financial ";
+import Financial from "../Pages/Financial";
 import Certificates from "../Pages/Certificates";
 import SystemIntegration from "../Pages/SystemIntegration";
 import FacilityManagement from "../Pages/FacilityManagement";

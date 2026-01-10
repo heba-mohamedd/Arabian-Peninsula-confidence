@@ -2,7 +2,7 @@ import React from "react";
 
 import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
-import ServiseCard from "../Components/ui/ServiseCard";
+import ServiceCard from "../Components/ui/ServiceCard";
 
 import ImageDivider from "../assets/Group 1 (1).png";
 import { service } from "../data/data";
@@ -29,7 +29,7 @@ export default function Sectors() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {service.map((item) => (
-            <ServiseCard key={item.id} item={item} />
+            <ServiceCard key={item.id} item={item} />
           ))}
         </div>
 

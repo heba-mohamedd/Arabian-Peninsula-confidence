@@ -8,19 +8,19 @@ export default function Statistics() {
       id: 1,
       value: "100",
       label: "مشاريع متعددة القطاعات",
-      pos: "top-[35%] right-[40%] md:right-[43%]",
+      pos: "top-[30%] md:top-[35%] right-[35%] md:right-[43%]",
     },
     {
       id: 2,
       value: "100",
       label: "مشاريع متعددة القطاعات",
-      pos: "top-[25%] right-[10%] md:right-[15%]",
+      pos: "top-[20%] md:top-[25%] right-[5%] md:right-[15%]",
     },
     {
       id: 3,
       value: "100",
       label: "مشاريع متعددة القطاعات",
-      pos: "top-[45%] right-[70%] md:right-[75%]",
+      pos: "top-[40%] md:top-[45%] right-[65%] md:right-[75%]",
     },
   ];
 

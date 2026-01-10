@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Card } from "antd";
 import { Typography } from "antd";
-import ServiseCard from "./ui/ServiseCard";
+import ServiceCard from "./ui/ServiceCard";
 const { Title } = Typography;
 
 const service = [
@@ -60,7 +60,7 @@ export default function OurService() {
           animate="visible"
         >
           {service.map((item) => (
-            <ServiseCard item={item} key={item.id} />
+            <ServiceCard item={item} key={item.id} />
           ))}
         </motion.div>
       </div>

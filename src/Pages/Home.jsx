@@ -1,6 +1,6 @@
 import Hero from "../Components/Hero";
 import About from "../Components/About";
-import OurServise from "../Components/OurServise";
+import OurService from "../Components/OurService";
 import Statistics from "../Components/Statistics";
 import RequestQuote from "../Components/RequestQuote";
 import Clients from "../Components/Clients";
@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       <Hero />
       <About />
-      <OurServise />
+      <OurService />
       <Statistics />
       <RequestQuote
         title="تقديم طلب عرض سعر"

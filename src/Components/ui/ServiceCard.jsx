@@ -10,7 +10,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-export default function ServiseCard({ item }) {
+export default function ServiceCard({ item }) {
   return (
     <Link to={`/SectorDetails/${item.id}`}>
       <motion.div
