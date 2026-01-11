@@ -10,7 +10,7 @@ const cardVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-export default function ServiceCard({ item }) {
+const ServiceCard = React.memo(({ item }) => {
   return (
     <Link to={`/SectorDetails/${item.id}`}>
       <motion.div
@@ -27,6 +27,7 @@ export default function ServiceCard({ item }) {
               alt={item.title}
               src={item.src}
               className="h-48 sm:h-56 md:h-64 object-cover"
+              loading="lazy"
             />
           }
           className="text-center h-full"
@@ -41,4 +42,8 @@ export default function ServiceCard({ item }) {
       </motion.div>
     </Link>
   );
-}
+});
+
+ServiceCard.displayName = "ServiceCard";
+
+export default ServiceCard;

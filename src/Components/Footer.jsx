@@ -5,7 +5,7 @@ import footerimage from "../assets/236627169d5a53522a3134e218015a0810d64acb.png"
 export default function Footer() {
   const [isOpened, setIsOpend] = useState(true);
   return (
-    <footer className="bg-secondary  text-[#B8B8B8] mt-10" dir="rtl">
+    <footer className="bg-secondary  text-[#B8B8B8]" dir="rtl">
       <div
         className="bg-white border-4 border-primary rounded-full w-16 sm:w-17.5 h-16 sm:h-17.5 
                 flex items-center justify-center mx-auto relative -top-6 sm:-top-7.5 cursor-pointer transition-transform hover:scale-110 z-10"

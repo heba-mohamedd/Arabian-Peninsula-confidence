@@ -16,7 +16,7 @@ const textItem = {
   visible: { opacity: 1, y: 0 },
 };
 
-export default function Hero() {
+const Hero = React.memo(function Hero() {
   return (
     <section className="relative h-80 sm:h-96 md:h-125 lg:h-150 w-full overflow-hidden font-sans">
       <div
@@ -34,6 +34,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
+        style={{ willChange: "opacity, transform" }}
       >
         <div
           className="absolute inset-0 bg-[#00963F] opacity-20"
@@ -56,6 +57,7 @@ export default function Hero() {
         variants={textContainer}
         initial="hidden"
         animate="visible"
+        style={{ willChange: "transform" }}
       >
         <div className="max-w-2xl">
           <motion.h1
@@ -80,4 +82,6 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 bg-blue-900/10 pointer-events-none"></div>
     </section>
   );
-}
+});
+
+export default Hero;

@@ -34,16 +34,14 @@ export default function SystemIntegration() {
       transition={{ duration: 0.8 }}
     >
       <Title title="خدمات تكامل الانظمة" />
-      <div className="container max-w-7xl mx-auto px-4">
-        {/* القسم الرئيسي */}
+      <div className="container max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <div className="mt-8  rounded-3xl overflow-hidden ">
-            <div className="p-8 md:p-12">
-              <Header
-                title="حلول تكامل الأنظمة المتطورة"
-                description="نقدم حلول تكامل أنظمة متقدمة تربط بين التقنيات المختلفة داخل منشآتكم، لضمان تشغيل ذكي، آمن، ومستدام وفق أعلى المعايير المعتمدة."
-              />
-            </div>
+          <div className="mt-8  rounded-3xl overflow-hidden  flex flex-col items-center justify-center ">
+            <Header
+              title="حلول تكامل الأنظمة المتطورة"
+              description="نقدم حلول تكامل أنظمة متقدمة تربط بين التقنيات المختلفة داخل منشآتكم، لضمان تشغيل ذكي، آمن، ومستدام وفق أعلى المعايير المعتمدة."
+            />
+
             <img src={systemIntegrationImage} alt="System Integration" />
             {/* <ServicesMindMap /> */}
           </div>
@@ -52,12 +50,11 @@ export default function SystemIntegration() {
         <div>
           <div className=" mx-auto px-4">
             {/* Header */}
-            <div className="mb-12 text-center">
-              <Header title="أنظمة المراقبة والكاميرات الأمنية" />
-            </div>
+
+            <Header title="أنظمة المراقبة والكاميرات الأمنية" />
 
             {/* Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-center mt-5">
               {/* Right List */}
               <div className="order-2 lg:order-1 space-y-4">
                 {surveillanceFeatures.slice(0, 2).map((feature, index) => (
@@ -88,9 +85,9 @@ export default function SystemIntegration() {
             </div>
           </div>
         </div>
-        <div className="mb-10 w-full">
-          <BMSSection />
-        </div>
+
+        <BMSSection />
+
         <RequestQuote
           title="خلّي أنظمتك تشتغل مع بعض… مش كل نظام لوحده"
           buttonText="تواصل مع فريق تكامل الأنظمة"

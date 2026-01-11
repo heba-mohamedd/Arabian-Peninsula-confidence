@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Dropdown, Space } from "antd";
 import { GlobalOutlined, DownOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
-import logo from "../assets/Logo.png";
+import logo from "/Logo.png";
+import { LuDot } from "react-icons/lu";
 
 const Navbar = () => {
   const [isClick, setIsClick] = useState("الرئيسية");
@@ -36,27 +37,25 @@ const Navbar = () => {
         />
       </div>
 
-      <ul className="hidden lg:flex items-center gap-4 xl:gap-6 text-gray-700 font-medium text-sm xl:text-base">
+      <ul className="hidden lg:flex items-center gap-4 xl:gap-6 text-dark-grey font-medium text-sm xl:text-base">
         {navLinks.map((link, index) => (
           <li key={index} className="flex items-center gap-2">
             <NavLink
               to={link.href}
               onClick={() => setIsClick(link.name)}
-              className={`hover:text-[#00963F] transition-colors  ${
-                isClick === link.name ? "text-[#00963F]" : ""
+              className={`hover:text-primary transition-colors flex justify-center items-center ${
+                isClick === link.name ? "text-primary" : ""
               } `}
             >
+              <LuDot className="shrink-0 mt-1" size={24} />
               {link.name}
             </NavLink>
-            {index !== navLinks.length - 1 && (
-              <span className="text-gray-300 mr-4">•</span>
-            )}
           </li>
         ))}
       </ul>
 
       <button
-        className="lg:hidden text-2xl text-gray-700"
+        className="lg:hidden text-2xl text-dark-grey"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
       >
         ☰
@@ -81,7 +80,7 @@ const Navbar = () => {
 
       {mobileMenuOpen && (
         <div
-          className="absolute top-16 left-0 right-0 bg-white border-b border-gray-100 lg:hidden shadow-md z-50"
+          className="absolute top-16 left-0 right-0 bg-white border-b text-dark-grey  lg:hidden shadow-md z-50"
           dir="rtl"
         >
           <ul className="flex flex-col p-4 space-y-3">
@@ -95,8 +94,8 @@ const Navbar = () => {
                   }}
                   className={`block py-2 px-3 rounded transition-colors ${
                     isClick === link.name
-                      ? "text-[#00963F] bg-green-50"
-                      : "text-gray-700 hover:bg-gray-50"
+                      ? "text-primary bg-green-50"
+                      : " hover:bg-gray-50"
                   }`}
                 >
                   {link.name}

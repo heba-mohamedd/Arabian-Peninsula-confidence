@@ -20,7 +20,7 @@ const BMS_DATA = {
 };
 
 const FeatureCard = ({ text }) => (
-  <div className="bg-gray-200 p-4 rounded-xl">
+  <div className="bg-neutral-200 p-4 rounded-xl">
     <p className="text-dark-grey font-medium text-sm lg:text-base">{text}</p>
   </div>
 );
@@ -43,7 +43,7 @@ export default function BMSSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="flex gap-4 group">
-            <div className="relative w-3 bg-primary/20 rounded-full h-full min-h-[400px]">
+            <div className="relative w-3 bg-primary/20 rounded-full h-full min-h-[250px] overflow-hidden">
               <motion.div
                 className="absolute left-0 w-full bg-green-600 rounded-full shadow-[0_0_10px_rgba(22,163,74,0.5)]"
                 initial={false}
@@ -63,13 +63,12 @@ export default function BMSSection() {
                 <div
                   key={index}
                   className="relative overflow-hidden rounded-lg cursor-pointer"
-                  onMouseEnter={() => setActiveIndex(index)} // يتيح للمستخدم التغيير يدوياً بالماوس أيضاً
+                  onMouseEnter={() => setActiveIndex(index)}
                 >
                   <motion.img
                     src={img}
                     alt={`BMS illustration ${index + 1}`}
                     animate={{
-                      // تأثير Hover تلقائي للصورة النشطة
                       scale: activeIndex === index ? 1.05 : 1,
                       filter:
                         activeIndex === index
@@ -80,8 +79,6 @@ export default function BMSSection() {
                     transition={{ duration: 0.5 }}
                     className="w-full h-auto shadow-md object-cover rounded-lg"
                   />
-
-                  {/* طبقة إضاءة خفيفة عند النشاط */}
                   {activeIndex === index && (
                     <motion.div
                       layoutId="glow"

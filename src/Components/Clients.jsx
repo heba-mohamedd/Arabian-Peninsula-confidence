@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Header from "./ui/Header";
 import { logos } from "../data/data";
 
-export default function Clients() {
+const Clients = React.memo(function Clients() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -50,11 +50,13 @@ export default function Clients() {
               variants={itemVariants}
               whileHover={{ scale: 1.05 }}
             >
-              <img src={img} alt="logos" />
+              <img src={img} alt="logos" loading="lazy" />
             </motion.div>
           ))}
         </motion.div>
       </div>
     </section>
   );
-}
+});
+
+export default Clients;

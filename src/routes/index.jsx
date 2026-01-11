@@ -1,14 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../Layout/Layout";
-import Home from "../Pages/Home";
-import Sectors from "../Pages/Sectors";
-import SectorDetails from "../Pages/SectorDetails";
-import Financial from "../Pages/Financial";
-import Certificates from "../Pages/Certificates";
-import SystemIntegration from "../Pages/SystemIntegration";
-import FacilityManagement from "../Pages/FacilityManagement";
-import AboutUs from "../Pages/AboutUs";
-import ContactUs from "../Pages/ContactUs";
+import { lazy } from "react";
+
+const Home = lazy(() => import("../Pages/Home"));
+const Sectors = lazy(() => import("../Pages/Sectors"));
+const SectorDetails = lazy(() => import("../Pages/SectorDetails"));
+const Financial = lazy(() => import("../Pages/Financial"));
+const Certificates = lazy(() => import("../Pages/Certificates"));
+const SystemIntegration = lazy(() => import("../Pages/SystemIntegration"));
+const FacilityManagement = lazy(() => import("../Pages/FacilityManagement"));
+const AboutUs = lazy(() => import("../Pages/AboutUs"));
+const ContactUs = lazy(() => import("../Pages/ContactUs"));
 
 export const router = createBrowserRouter([
   {
