@@ -6,6 +6,7 @@ import ServiceCard from "../Components/ui/ServiceCard";
 
 import ImageDivider from "../assets/Group 1 (1).png";
 import { service } from "../data/data";
+import ModernProcess from "../Components/ModernProcess.jsx";
 
 export default function Sectors() {
   return (
@@ -40,13 +41,14 @@ export default function Sectors() {
             قطاعاتنا، مع تخصيص فرق متخصصة لكل قطاع وفق أفضل الممارسات."
           />
 
-          <div className="w-[70%]  mb-10">
+          {/* <div className="w-[70%]  mb-10">
             <img
               src={ImageDivider}
               alt="نموذج إدارة العمل"
               className="w-full h-auto max-h-[400px] object-contain"
             />
-          </div>
+          </div> */}
+          <ModernProcess />
         </div>
       </div>
     </section>

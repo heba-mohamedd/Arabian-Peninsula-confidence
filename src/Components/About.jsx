@@ -29,7 +29,7 @@ export default function About() {
           <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">
             نبذة عنا
           </h2>
-          <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8">
+          <p className="text-dark-grey text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8">
             شركة سعودية متخصصة في تقديم حلول متكاملة تشمل إدارة المرافق، تكامل
             الأنظمة، والتشغيل والصيانة، نعمل على دعم الجهات الحكومية والقطاع
             الخاص من خلال منظومة تشغيل ذكية، آمنة، ومستدامة.
@@ -46,9 +46,9 @@ export default function About() {
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="flex items-center gap-3 text-gray-800 font-medium text-sm sm:text-base md:text-lg"
+                className="flex items-center gap-3 text-secondary font-medium text-sm sm:text-base md:text-lg"
               >
-                <span className="w-2 h-2 bg-gray-800 rounded-full flex-shrink-0"></span>
+                <span className="w-2 h-2 bg-secondary rounded-full flex-shrink-0"></span>
                 {item}
               </motion.li>
             ))}
@@ -69,8 +69,8 @@ export default function About() {
               className="w-full h-full object-cover"
             />
 
-            <div className="absolute bottom-0 right-0 w-20 sm:w-24 md:w-25 h-20 sm:h-24 md:h-25 bg-white rounded-tl-[2rem] md:rounded-tl-[3rem] flex items-center justify-center">
-              <div className="w-12 sm:w-14 md:w-15 h-12 sm:h-14 md:h-15 bg-primary text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform">
+            <div className="absolute bottom-0 right-0 w-20 w-24  h-20 5 bg-white rounded-tl-[3rem] flex items-center justify-center">
+              <div className="w-12 h-12   bg-primary text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:scale-110 transition-transform">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

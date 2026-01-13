@@ -74,14 +74,14 @@ export default function Certificates() {
     >
       <Title title="الـشـهادات" />
 
-      <div className="container max-w-5xl  mx-auto px-6 mt-10">
+      <div className="container max-w-7xl  mx-auto px-6 mt-10 ">
         <Header
           title="الشهادات والاعتمادات"
           description="تعكس الشهادات والاعتمادات التي حصلنا عليها التزامنا بالجودة والسلامة والكفاءة التشغيلية في جميع القطاعات التي نعمل بها."
         />
 
         {/* Certificates Grid */}
-        <div className="max-w-5xl  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12">
           {certificates.map((item, index) => (
             <motion.div
               key={item + index}
