@@ -30,18 +30,16 @@ const OurService = React.memo(function OurService() {
         </p>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-7 md:gap-15 "
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {service.slice(0, 3).map((item) => (
-            <ServiceCard item={item} key={item.id} />
-          ))}
-        </motion.div>
-      </div>
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {service.slice(0, 3).map((item) => (
+          <ServiceCard item={item} key={item.id} />
+        ))}
+      </motion.div>
     </section>
   );
 });

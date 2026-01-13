@@ -28,7 +28,7 @@ export default function Sectors() {
         />
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  gap-7 md:gap-15 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4">
           {service.map((item) => (
             <ServiceCard key={item.id} item={item} />
           ))}

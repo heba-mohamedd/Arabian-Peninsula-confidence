@@ -3,13 +3,14 @@ import { motion } from "framer-motion";
 import { LuDot } from "react-icons/lu";
 import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
-import systemIntegrationImage from "../assets/systemIntegrationImage.png";
+// import systemIntegrationImage from "../assets/systemIntegrationImage.png";
 import cameraImage from "../assets/cameraImage.png";
 import RequestQuote from "../Components/RequestQuote";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import BMSSection from "../Components/BMSSection";
 
 import SmartSystemMap from "../Components/GraphFlow.jsx";
+import GraphFlow from "../Components/GraphFlow.jsx";
 
 const FeatureItem = ({ text }) => (
   <div className="flex items-start h-[30%] py-10 bg-neutral-200 rounded-xl  ">
@@ -44,11 +45,11 @@ export default function SystemIntegration() {
             />
           </div>
 
-          <div className="relative mx-auto w-[80%]  ">
+          {/* <div className="relative mx-auto w-[80%]  ">
             <img src={systemIntegrationImage} alt="System Integration" />
-          </div>
+          </div> */}
 
-          {/* <SmartSystemMap /> */}
+          <GraphFlow />
         </div>
 
         <div className="">

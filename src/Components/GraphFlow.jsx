@@ -1,4 +1,15 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { useCallback, useState, useEffect } from "react";
+import {
+  ReactFlow,
+  Background,
+  Controls,
+  MiniMap,
+  useNodesState,
+  useEdgesState,
+  MarkerType,
+} from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
+import { motion } from "framer-motion";
 import {
   FaBuilding,
   FaVideo,
@@ -7,234 +18,343 @@ import {
   FaLightbulb,
   FaHeadset,
   FaShieldHalved,
-  FaCircleCheck,
-  FaBolt,
+  FaNetworkWired,
+  FaArrowDown,
 } from "react-icons/fa6";
 
-const services = [
+// System data
+const systemsData = [
   {
-    id: 1,
-    title: "أنظمة إدارة المباني",
-    desc: "BMS & Control",
+    id: "sys-1",
+    label: "أنظمة إدارة المباني",
     icon: FaBuilding,
-    color: "from-emerald-400 to-emerald-600",
+    color: "from-blue-500 to-blue-600",
+    borderColor: "border-blue-200",
   },
   {
-    id: 2,
-    title: "أنظمة المراقبة",
-    desc: "Security & CCTV",
-    icon: FaVideo,
-    color: "from-green-400 to-green-600",
-  },
-  {
-    id: 3,
-    title: "أنظمة التحكم",
-    desc: "Automation Systems",
-    icon: FaGears,
-    color: "from-teal-400 to-teal-600",
-  },
-  {
-    id: 4,
-    title: "الأنظمة الصوتية",
-    desc: "Audio & Visual",
+    id: "sys-2",
+    label: "الأنظمة الصوتية والمرئية",
     icon: FaDesktop,
-    color: "from-emerald-500 to-teal-500",
+    color: "from-purple-500 to-purple-600",
+    borderColor: "border-purple-200",
   },
   {
-    id: 5,
-    title: "الحلول الذكية",
-    desc: "Smart Solutions",
+    id: "sys-3",
+    label: "أنظمة المراقبة والكاميرات",
+    icon: FaVideo,
+    color: "from-red-500 to-red-600",
+    borderColor: "border-red-200",
+  },
+  {
+    id: "sys-4",
+    label: "الحلول الذكية",
     icon: FaLightbulb,
-    color: "from-green-500 to-emerald-500",
+    color: "from-yellow-500 to-yellow-600",
+    borderColor: "border-yellow-200",
   },
   {
-    id: 6,
-    title: "الدعم التقني",
-    desc: "Technical Support",
+    id: "sys-5",
+    label: "أنظمة التحكم",
+    icon: FaGears,
+    color: "from-teal-500 to-teal-600",
+    borderColor: "border-teal-200",
+  },
+  {
+    id: "sys-6",
+    label: "خدمات الإدارة والدعم التقني",
     icon: FaHeadset,
-    color: "from-teal-500 to-green-500",
+    color: "from-indigo-500 to-indigo-600",
+    borderColor: "border-indigo-200",
   },
   {
-    id: 7,
-    title: "القيادة الأمنية",
-    desc: "Unified Command",
+    id: "sys-7",
+    label: "مراكز القيادة الأمنية الموحدة",
     icon: FaShieldHalved,
-    color: "from-emerald-600 to-green-600",
+    color: "from-emerald-500 to-emerald-600",
+    borderColor: "border-emerald-200",
   },
 ];
 
-const CircuitBackground = () => (
-  <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-    <svg className="w-full h-full" viewBox="0 0 800 800">
-      <defs>
-        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#10b981" stopOpacity="0" />
-          <stop offset="50%" stopColor="#10b981" stopOpacity="1" />
-          <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <circle
-        cx="400"
-        cy="400"
-        r="350"
-        fill="none"
-        stroke="url(#lineGrad)"
-        strokeWidth="0.5"
-        strokeDasharray="10 20"
-      />
-      <motion.path
-        d="M 400 50 L 400 750 M 50 400 L 750 400 M 150 150 L 650 650 M 650 150 L 150 650"
-        stroke="currentColor"
-        strokeWidth="0.5"
-        className="text-emerald-500"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-      />
-    </svg>
-  </div>
-);
-
-const SystemModule = ({ service, index }) => {
+// Mobile View Component - Vertical Layout
+const MobileView = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      whileHover={{ scale: 1.02, y: -5 }}
-      className="relative group h-full"
-    >
-      <div className="absolute -inset-0.5 bg-linear-to-r from-emerald-500 to-green-500 rounded-2xl blur-sm opacity-0 group-hover:opacity-20 transition duration-500" />
+    <div className="w-full py-8 px-4 bg-gradient-to-b from-slate-50 via-gray-50 to-slate-100 rounded-3xl">
+      <div className="max-w-md mx-auto space-y-4">
+        {/* Central Hub */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="relative"
+        >
+          <div className="bg-gradient-to-br from-emerald-500 via-teal-500 to-blue-500 rounded-2xl p-6 shadow-xl">
+            <div className="text-center text-white">
+              <FaNetworkWired className="text-4xl mx-auto mb-3 drop-shadow-lg" />
+              <h3 className="text-xl font-black mb-1">مركز التكامل</h3>
+              <p className="text-sm font-semibold opacity-90">
+                Integration Hub
+              </p>
+              <div className="mt-3 flex items-center justify-center gap-2 bg-white/20 rounded-full px-3 py-1">
+                <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                <span className="text-xs font-bold">Connected</span>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
-      <div className="relative h-full bg-white/80 backdrop-blur-xl border border-emerald-100/50 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between">
-        <div className="flex items-start justify-between mb-4">
-          <div
-            className={`p-3 rounded-xl bg-linear-to-br ${service.color} text-white shadow-lg shadow-emerald-200/50 group-hover:scale-110 transition-transform duration-300`}
-          >
-            <service.icon size={24} />
-          </div>
-          <div className="flex items-center gap-1.5 px-3 py-1 bg-emerald-50 rounded-full">
-            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" />
-            <span className="text-[10px] uppercase font-bold text-emerald-600 tracking-wider">
-              Active
-            </span>
-          </div>
+        {/* Arrow Down */}
+        <div className="flex justify-center">
+          <FaArrowDown className="text-2xl text-emerald-500 animate-bounce" />
         </div>
 
-        <div>
-          <h3 className="text-lg font-bold text-slate-800 mb-1 group-hover:text-emerald-700 transition-colors">
-            {service.title}
-          </h3>
-          <p className="text-xs text-slate-500 font-medium">{service.desc}</p>
-        </div>
-
-        <div className="mt-6 pt-4 border-t border-slate-50 flex items-center justify-between">
-          <div className="flex -space-x-2">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="w-6 h-6 rounded-full bg-slate-100 border-2 border-white flex items-center justify-center text-[8px] font-bold text-slate-400"
+        {/* Systems List */}
+        <div className="space-y-3">
+          {systemsData.map((system, index) => {
+            const Icon = system.icon;
+            return (
+              <motion.div
+                key={system.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 + index * 0.1 }}
               >
-                0{i}
-              </div>
-            ))}
-          </div>
-          <FaBolt className="text-emerald-400 group-hover:text-emerald-600 transition-colors" />
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+                <div
+                  className={`bg-white border-2 ${system.borderColor} rounded-xl p-4 shadow-md active:scale-95 transition-transform`}
+                >
+                  <div className="flex items-center gap-4">
+                    {/* Icon */}
+                    <div
+                      className={`p-3 rounded-lg bg-gradient-to-br ${system.color} flex-shrink-0`}
+                    >
+                      <Icon className="text-2xl text-white" />
+                    </div>
 
-const SmartSystemMap = () => {
-  return (
-    <div
-      className="relative w-full min-h-[800px] bg-slate-50/50 rounded-[2.5rem] border border-slate-200/60 overflow-hidden font-sans p-4 md:p-8 lg:p-12"
-      dir="rtl"
-    >
-      {/* Decorative Background */}
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-emerald-100/30 blur-[120px] rounded-full" />
-      <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-green-100/30 blur-[120px] rounded-full" />
-      <CircuitBackground />
+                    {/* Label */}
+                    <div className="flex-1">
+                      <h4 className="text-sm font-bold text-gray-800 leading-snug">
+                        {system.label}
+                      </h4>
+                    </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="mb-12 text-center md:text-right flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-50 rounded-full text-emerald-600 text-xs font-bold mb-4"
-            >
-              <FaBolt />
-              أنظمة ذكية متكاملة
-            </motion.div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 leading-tight">
-              خريطة تكامل <br />
-              <span className="text-emerald-600">الأنظمة الرقمية</span>
-            </h2>
-          </div>
-          <p className="text-slate-500 max-w-md text-sm md:text-base leading-relaxed">
-            نحن نربط الأنظمة المنفصلة لتصبح كائناً تقنياً واحداً، مما يرفع كفاءة
-            التشغيل ويوفر أقصى درجات الأمان والتحكم الذكي.
-          </p>
-        </div>
-
-        {/* Dynamic Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 min-h-[600px]">
-          {/* Main Core / Highlights column */}
-          <div className="lg:col-span-4 flex flex-col gap-6 ">
-            <div className="flex-1 bg-slate-900 rounded-[2rem] p-8 text-white relative overflow-hidden group">
-              <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:rotate-12 transition-transform duration-500 text-emerald-500">
-                <FaGears size={140} />
-              </div>
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <h4 className="text-emerald-400 font-bold mb-2">
-                    النظام المركزي
-                  </h4>
-                  <p className="text-2xl font-black mb-4 uppercase tracking-tighter">
-                    Unified Hub 01
-                  </p>
-                  <p className="text-slate-400 text-sm leading-relaxed">
-                    تكامل سلس لجميع المرافق تحت منصة واحدة تدعم الذكاء الاصطناعي
-                    والتحليل الفوري.
-                  </p>
+                    {/* Status */}
+                    <div
+                      className={`w-2 h-2 rounded-full bg-gradient-to-r ${system.color} animate-pulse flex-shrink-0`}
+                    />
+                  </div>
                 </div>
-                <button className="mt-8 px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-xl transition-all self-start flex items-center gap-2 shadow-lg shadow-emerald-500/20">
-                  <FaCircleCheck />
-                  استكشاف النظام
-                </button>
-              </div>
-            </div>
+              </motion.div>
+            );
+          })}
+        </div>
 
-            <div className="hidden lg:block">
-              <SystemModule service={services[0]} index={0} />
-            </div>
-          </div>
-
-          {/* Secondary Modules Grid */}
-          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-            {services.slice(1).map((service, index) => (
-              <SystemModule
-                key={service.id}
-                service={service}
-                index={index + 1}
-              />
-            ))}
+        {/* Info Badge */}
+        <div className="text-center pt-4">
+          <div className="inline-block bg-white/90 border border-gray-200 rounded-full px-5 py-2 shadow-md">
+            <p className="text-sm font-bold text-gray-700">
+              <span className="text-emerald-600 text-lg">
+                {systemsData.length}
+              </span>{" "}
+              أنظمة متكاملة
+            </p>
           </div>
         </div>
-      </div>
-
-      {/* Decorative Branding */}
-      <div className="absolute bottom-6 right-12 opacity-5 pointer-events-none">
-        <span className="text-9xl font-black tracking-tighter">
-          INTEGRATION
-        </span>
       </div>
     </div>
   );
 };
 
-export default SmartSystemMap;
+// Desktop View Component - React Flow
+const DesktopView = () => {
+  // Custom Node Component for Systems
+  const SystemNode = ({ data }) => {
+    const Icon = data.icon;
+
+    return (
+      <div className="relative group">
+        <div
+          className={`absolute -inset-1 bg-gradient-to-r ${data.color} rounded-2xl blur opacity-0 group-hover:opacity-60 transition duration-300`}
+        />
+
+        <div
+          className={`relative bg-white border-2 ${data.borderColor} rounded-2xl p-4 shadow-lg hover:shadow-2xl transition-all duration-300 min-w-[180px] max-w-[200px]`}
+        >
+          <div className="flex justify-center mb-3">
+            <div
+              className={`p-3 rounded-xl bg-gradient-to-br ${data.color} shadow-md`}
+            >
+              <Icon className="text-2xl text-white" />
+            </div>
+          </div>
+
+          <h4 className="text-sm font-bold text-gray-800 text-center leading-snug mb-3">
+            {data.label}
+          </h4>
+
+          <div
+            className={`pt-3 border-t ${data.borderColor} flex items-center justify-center gap-2`}
+          >
+            <div
+              className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${data.color} animate-pulse`}
+            />
+            <span className="text-[10px] font-bold text-gray-500 uppercase tracking-wide">
+              Active
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // Custom Node Component for Central Hub
+  const HubNode = () => {
+    return (
+      <div className="relative">
+        <div className="absolute -inset-4 bg-gradient-to-br from-emerald-400 to-blue-500 rounded-3xl blur-2xl opacity-50 animate-pulse" />
+
+        <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-blue-500 rounded-3xl p-10 shadow-2xl min-w-[280px]">
+          <div className="text-center text-white">
+            <div className="inline-block mb-4 animate-spin-slow">
+              <FaNetworkWired className="text-6xl drop-shadow-lg" />
+            </div>
+            <h3 className="text-2xl font-black mb-2">مركز التكامل</h3>
+            <p className="text-base font-semibold opacity-90 mb-3">
+              Integration Hub
+            </p>
+            <div className="flex items-center justify-center gap-2 bg-white/20 rounded-full px-4 py-2">
+              <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+              <span className="text-xs font-bold uppercase tracking-wider">
+                Connected
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const nodeTypes = {
+    systemNode: SystemNode,
+    hubNode: HubNode,
+  };
+
+  // Calculate circular positions
+  const getCircularPosition = (index, total, radius = 450) => {
+    const angle = (index * 360) / total - 90;
+    const rad = (angle * Math.PI) / 180;
+    return {
+      x: 500 + radius * Math.cos(rad),
+      y: 350 + radius * Math.sin(rad),
+    };
+  };
+
+  // Create nodes
+  const initialNodes = [
+    {
+      id: "hub",
+      type: "hubNode",
+      position: { x: 400, y: 250 },
+      data: {},
+      draggable: false,
+    },
+    ...systemsData.map((system, index) => {
+      const pos = getCircularPosition(index, systemsData.length);
+      return {
+        id: system.id,
+        type: "systemNode",
+        position: pos,
+        data: system,
+      };
+    }),
+  ];
+
+  // Create edges
+  const initialEdges = systemsData.map((system) => ({
+    id: `edge-hub-${system.id}`,
+    source: "hub",
+    target: system.id,
+    type: "smoothstep",
+    animated: true,
+    style: {
+      stroke: "#10b981",
+      strokeWidth: 2,
+      opacity: 0.6,
+    },
+    markerEnd: {
+      type: MarkerType.ArrowClosed,
+      color: "#10b981",
+      width: 20,
+      height: 20,
+    },
+  }));
+
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  return (
+    <div className="w-full h-[850px] bg-gradient-to-br from-slate-50 via-gray-50 to-slate-100 rounded-3xl overflow-hidden shadow-lg">
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        nodeTypes={nodeTypes}
+        fitView
+        minZoom={0.5}
+        maxZoom={1.5}
+        defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
+        proOptions={{ hideAttribution: true }}
+      >
+        <Background
+          color="#10b981"
+          gap={20}
+          size={1}
+          variant="dots"
+          style={{ opacity: 0.15 }}
+        />
+
+        <Controls
+          className="bg-white shadow-lg rounded-lg border border-gray-200"
+          showInteractive={false}
+        />
+
+        <MiniMap
+          nodeColor={(node) => {
+            if (node.type === "hubNode") return "#10b981";
+            return "#3b82f6";
+          }}
+          maskColor="rgba(0, 0, 0, 0.1)"
+          className="bg-white shadow-lg rounded-lg border border-gray-200"
+          style={{ width: 150, height: 100 }}
+        />
+      </ReactFlow>
+
+      <style>{`
+        @keyframes spin-slow {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+          animation: spin-slow 20s linear infinite;
+        }
+      `}</style>
+    </div>
+  );
+};
+
+// Main Component with Responsive Detection
+const GraphFlow = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return <div dir="rtl">{isMobile ? <MobileView /> : <DesktopView />}</div>;
+};
+
+export default GraphFlow;

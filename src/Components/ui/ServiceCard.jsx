@@ -17,7 +17,7 @@ const ServiceCard = React.memo(({ item }) => {
         variants={cardVariants}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-full sm:w-72 lg:w-85"
+        className="w-full h-full"
       >
         <Card
           hoverable
@@ -26,7 +26,7 @@ const ServiceCard = React.memo(({ item }) => {
               draggable={false}
               alt={item.title}
               src={item.src}
-              className="h-48 sm:h-56 md:h-64 object-cover"
+              className="w-full h-48 sm:h-52 md:h-56 object-cover"
               loading="lazy"
             />
           }
