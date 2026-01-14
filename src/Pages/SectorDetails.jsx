@@ -20,7 +20,7 @@ export default function SectorDetails() {
   }
 
   return (
-    <section className="flex flex-col items-center" dir="rtl">
+    <section className="flex flex-col items-center">
       <Title title="القطاعات" />
 
       <div className="container max-w-6xl mx-auto px-6 flex flex-col items-center my-10">

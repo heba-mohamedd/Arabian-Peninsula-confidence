@@ -42,7 +42,6 @@ const certificates = [
 export default function Certificates() {
   return (
     <motion.section
-      dir="rtl"
       variants={containerVariants}
       initial="hidden"
       animate="visible"

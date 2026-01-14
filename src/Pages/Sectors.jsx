@@ -27,18 +27,13 @@ const itemVariants = {
 
 export default function Sectors() {
   return (
-    <section
-      dir="rtl"
-      className="flex flex-col items-center justify-center text-center"
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="flex flex-col items-center justify-center"
     >
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Title title="القطاعات" />
-      </motion.div>
-
+      <Title title="القطاعات" />
       <div className="container mx-auto max-w-7xl flex flex-col items-center gap-12 my-6">
         {/* Section Header */}
         <motion.div
@@ -88,6 +83,6 @@ export default function Sectors() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

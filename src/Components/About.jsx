@@ -15,10 +15,7 @@ export default function About() {
   };
 
   return (
-    <section
-      className=" container max-w-7xl mx-auto  py-12 overflow-hidden"
-      dir="rtl"
-    >
+    <section className=" container max-w-7xl mx-auto  py-12 overflow-hidden ">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8  items-center">
         <motion.div
           initial="hidden"
@@ -67,6 +64,7 @@ export default function About() {
     justify-center 
     mx-auto 
     w-full 
+    px-4
     max-w-sm 
     sm:max-w-md 
     lg:max-w-lg 
@@ -77,7 +75,7 @@ export default function About() {
           <img
             src={Image}
             alt="About Thibat"
-            className="w-full h-auto object-cover"
+            className="w-full h-auto object-cover "
           />
 
           {/* Play Icon */}
@@ -95,7 +93,7 @@ export default function About() {
       rounded-full
       flex items-center justify-center
       cursor-pointer
-
+mx-4
       hover:scale-110
       active:scale-95
       transition-all

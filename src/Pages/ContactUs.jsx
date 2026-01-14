@@ -9,7 +9,6 @@ import backgroundContantInformation from "../assets/contactInformation.png";
 export default function ContactUs() {
   return (
     <motion.section
-      dir="rtl"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}

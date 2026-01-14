@@ -15,10 +15,7 @@ const containerVariants = {
 
 const OurService = React.memo(function OurService() {
   return (
-    <section
-      className="container max-w-7xl py-6 overflow-hidden mx-auto my-5"
-      dir="rtl"
-    >
+    <section className="container max-w-7xl py-6 overflow-hidden mx-auto my-5">
       <div className="flex flex-col justify-center items-center px-4 sm:px-6 md:px-0">
         <p className="text-2xl sm:text-3xl md:text-4xl text-center font-semibold">
           القطاعات التي نخدمها

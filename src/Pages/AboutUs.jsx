@@ -35,7 +35,6 @@ const cardVariants = {
 export default function AboutUs() {
   return (
     <motion.section
-      dir="rtl"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}

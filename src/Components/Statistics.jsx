@@ -59,7 +59,7 @@ export default React.memo(function Statistics() {
   ];
 
   return (
-    <section className="relative w-full mx-auto" dir="rtl">
+    <section className="relative w-full mx-auto">
       <div className="w-full ">
         <div
           className="

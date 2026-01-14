@@ -75,7 +75,6 @@ const categories = [
 export default function FacilityManagement() {
   return (
     <motion.section
-      dir="rtl"
       className="overflow-x-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

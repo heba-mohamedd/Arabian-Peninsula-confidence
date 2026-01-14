@@ -53,13 +53,14 @@ const Hero = React.memo(function Hero() {
       </motion.div>
 
       <motion.div
-        className="relative z-20 container mx-auto h-full flex flex-col justify-center items-end text-white text-right"
+        className="relative z-20 container mx-auto h-full flex flex-col justify-center text-white "
         variants={textContainer}
         initial="hidden"
         animate="visible"
         style={{ willChange: "transform" }}
+        dir="rtl"
       >
-        <div className="max-w-2xl">
+        <div className="max-w-2xl mx-5 md:mx-0">
           <motion.h1
             variants={textItem}
             className="text-xl sm:text-2xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 leading-tight"
