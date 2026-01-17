@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Dropdown, Space } from "antd";
 import { GlobalOutlined, DownOutlined } from "@ant-design/icons";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
@@ -29,16 +30,13 @@ const Navbar = () => {
 
   const activeLink = useMemo(() => {
     const currentLink = navLinks.find(
-      (link) => link.href === location.pathname
+      (link) => link.href === location.pathname,
     );
     return currentLink ? currentLink.name : "الرئيسية";
   }, [location.pathname]);
 
   return (
-    <nav
-      className="flex items-center justify-between bg-white h-16 md:h-20 shadow-sm "
-      dir="rtl"
-    >
+    <nav className="flex items-center justify-between bg-white h-16 md:h-20 shadow-sm">
       {/* Logo */}
       <div className="shrink-0 w-20 h-20">
         <img
@@ -91,30 +89,40 @@ const Navbar = () => {
         </div>
       </div>
 
-      {mobileMenuOpen && (
-        <div
-          className="absolute top-16 left-0 right-0 bg-white border-b text-dark-grey lg:hidden shadow-md z-50"
-          dir="rtl"
-        >
-          <ul className="flex flex-col p-4 space-y-3">
-            {navLinks.map((link, index) => (
-              <li key={index}>
-                <NavLink
-                  to={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`block py-2 px-3 rounded transition-colors ${
-                    activeLink === link.name
-                      ? "text-primary bg-green-50"
-                      : "hover:bg-gray-50"
-                  }`}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            className="absolute top-16 left-0 right-0 bg-white border-b text-dark-grey lg:hidden shadow-md z-50"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <ul className="flex flex-col p-4 space-y-3">
+              {navLinks.map((link, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
                 >
-                  {link.name}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+                  <NavLink
+                    to={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block py-2 px-3 rounded transition-colors ${
+                      activeLink === link.name
+                        ? "text-primary bg-green-50"
+                        : "hover:bg-gray-50"
+                    }`}
+                  >
+                    {link.name}
+                  </NavLink>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

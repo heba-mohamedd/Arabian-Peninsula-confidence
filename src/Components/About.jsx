@@ -22,7 +22,7 @@ export default function About() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInRight}
-          className="text-right px-7"
+          className="text-start px-7"
         >
           <h2 className="text-primary text-2xl sm:text-3xl md:text-4xl font-bold mb-4 md:mb-6">
             نبذة عنا

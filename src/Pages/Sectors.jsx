@@ -30,13 +30,25 @@ export default function Sectors() {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4">
-          {service.map((item) => (
-            <div key={item.id}>
-              <ServiceCard item={item} />
-            </div>
+        {/* Cards Grid with Stagger Animation */}
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            visible: {
+              transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.1,
+              },
+            },
+          }}
+        >
+          {service.map((item, index) => (
+            <ServiceCard key={item.id} item={item} index={index} />
           ))}
-        </div>
+        </motion.div>
 
         <div className="flex flex-col items-center gap-6">
           <motion.div

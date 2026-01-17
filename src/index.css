@@ -1,13 +1,12 @@
 @import "tailwindcss";
 @theme {
-  --color-primary: #00963F;
-  --color-secondary: #00080A;
-  --color-dark-grey: #5D5D5D;
+  --color-primary: #00963f;
+  --color-secondary: #00080a;
+  --color-dark-grey: #5d5d5d;
   --color-black: #262626;
-  --color-light-grey: #B4B4B4;
-  --color-neutral : #B8B8B8
+  --color-light-grey: #b4b4b4;
+  --color-neutral: #b8b8b8;
 }
-
 
 :root {
   font-family: "Noto Kufi Arabic", sans-serif;
@@ -16,9 +15,12 @@
   line-height: 1.5;
   font-weight: 400;
 
+  /* Default direction for Arabic */
+  direction: rtl;
+
   color-scheme: light dark;
   color: black;
-  background-color: #F7F7F7;
+  background-color: #f7f7f7;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,16 +28,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* English direction support */
+:root[dir="ltr"],
+[dir="ltr"] {
+  direction: ltr;
+  font-family: "Inter", sans-serif;
+}
+
 /* Responsive utility styles */
 @media (max-width: 640px) {
   body {
     font-size: 14px;
   }
-  
+
   h1 {
     font-size: 1.5rem;
   }
-  
+
   h2 {
     font-size: 1.25rem;
   }
@@ -59,4 +68,3 @@ img {
     /* Adjust for small containers */
   }
 }
-

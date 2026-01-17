@@ -340,6 +340,7 @@
 // export default GraphFlow;
 
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import {
   ReactFlow,
   Handle,
@@ -422,11 +423,19 @@ const SystemNode = ({ data }) => {
         position={getTargetPosition()}
         style={{ background: "transparent", border: "none" }}
       />
-      <div
+      <motion.div
         className={`bg-white border-2 ${data.borderColor} rounded-2xl p-4 shadow-lg min-w-[180px] text-center`}
+        whileHover={{
+          scale: 1.05,
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.15)",
+          transition: { duration: 0.3 },
+        }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
       >
         <h4 className="text-sm font-bold text-gray-800">{data.label}</h4>
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -435,7 +444,7 @@ const HubNode = () => {
   const handleCount = systemsData.length;
 
   return (
-    <div className="relative w-32 h-32 ">
+    <div className="relative w-32 h-32">
       {Array.from({ length: handleCount }).map((_, i) => {
         const angle = (i * 360) / handleCount - 90;
         const rad = (angle * Math.PI) / 180;
@@ -457,9 +466,25 @@ const HubNode = () => {
         );
       })}
 
-      <div className="w-32 h-32 rounded-full border-4 border-primary bg-[#F7F7F7] shadow-xl flex items-center justify-center">
-        <FaNetworkWired className="text-3xl text-primary" />
-      </div>
+      <motion.div
+        className="w-32 h-32 rounded-full border-4 border-primary bg-[#F7F7F7] shadow-xl flex items-center justify-center"
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        >
+          <FaNetworkWired className="text-3xl text-primary" />
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
@@ -523,7 +548,13 @@ const Flow = () => {
   }));
 
   return (
-    <div className="w-full h-[500px]">
+    <motion.div
+      className="w-full h-[500px]"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -535,7 +566,7 @@ const Flow = () => {
         panOnDrag={false}
         proOptions={{ hideAttribution: true }}
       />
-    </div>
+    </motion.div>
   );
 };
 

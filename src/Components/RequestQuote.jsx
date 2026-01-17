@@ -1,5 +1,26 @@
+import { motion } from "framer-motion";
 import bgImage from "../assets/card.png";
 import PrimaryButton from "./ui/PrimaryButton";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
 
 export default function RequestQuote({
   title = "",
@@ -10,7 +31,7 @@ export default function RequestQuote({
 }) {
   return (
     <section className="container mx-auto px-4">
-      <div
+      <motion.div
         className="
           relative
           rounded-3xl
@@ -23,12 +44,16 @@ export default function RequestQuote({
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
       >
         {/* Overlay */}
         <div className="absolute inset-0 bg-black/40" />
 
         {/* Content */}
-        <div
+        <motion.div
           className="
             relative z-10
             text-center text-white
@@ -36,28 +61,45 @@ export default function RequestQuote({
             px-6 py-10
             flex flex-col items-center
           "
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
           {title && (
-            <h2 className="text-xl sm:text-2xl md:text-3xl ">{title}</h2>
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl"
+              variants={itemVariants}
+            >
+              {title}
+            </motion.h2>
           )}
 
           {description && (
-            <p className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed">
+            <motion.p
+              className="mt-4 text-sm sm:text-base md:text-lg leading-relaxed"
+              variants={itemVariants}
+            >
               {description}
-            </p>
+            </motion.p>
           )}
 
           {buttonText && (
-            <div className="mt-6">
+            <motion.div
+              className="mt-6"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <PrimaryButton
                 text={buttonText}
                 icon={buttonIcon}
                 onClick={onClick}
               />
-            </div>
+            </motion.div>
           )}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

@@ -65,7 +65,7 @@ const STEPS_DATA = [
 
 export default function StepsSection() {
   return (
-    <section dir="rtl" className="py-5">
+    <section className="py-5">
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-x-10 items-start">
           <div className="hidden md:contents">
@@ -83,7 +83,7 @@ export default function StepsSection() {
                   title={step.title}
                   {...step.props}
                 >
-                  <ul className="text-right list-disc list-outside">
+                  <ul className="text-start list-disc list-outside">
                     {step.items.map((item, index) => (
                       <li key={index}>{item}</li>
                     ))}
