@@ -7,6 +7,7 @@ import FinancialTimeline from "../Components/FinancialTimeline";
 import RequestQuote from "../Components/RequestQuote";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import Header from "./../Components/ui/Header";
+import { useNavigate } from "react-router-dom";
 
 const financialStatements = [
   {
@@ -22,14 +23,35 @@ const financialStatements = [
     description: "توضح حركة النقد والتدفقات التشغيلية.",
   },
 ];
+const mySteps = [
+  {
+    id: 1,
+    title: "الخطوة الأولى",
+    description: "الوصف",
+    items: ["البند الأول", "البند الثاني", "البند الثالث"],
+  },
+  {
+    id: 2,
+    title: "الخطوة الثانية",
+    description: "الوصف",
+    items: ["البند الأول", "البند الثاني", "البند الثالث"],
+  },
+];
+
+<StepsSection steps={mySteps} />;
 
 export default function Financial() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/contact-us#order");
+  }
   return (
     <motion.section
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center justify-center border"
     >
       <Title title="القوائم المالية" />
 
@@ -59,11 +81,11 @@ export default function Financial() {
           </div>
         </div>
         <div className="flex flex-col  mt-5">
-          <p className="text-2xl font-normal text-center mb-5">
+          <p className="text-2xl font-normal text-center">
             آلية الاطلاع على القوائم المالية - وفق سياسات الحوكمة والسرية
             المعتمدة
           </p>
-          <StepsSection />
+          <StepsSection steps={mySteps} />
         </div>
         <div className="flex flex-col ">
           <p className="text-2xl font-normal text-center ">
@@ -77,6 +99,7 @@ export default function Financial() {
             description={`تتيح الشركة الاطلاع على القوائم المالية للجهات ذات الصفة النظامية فقط، وذلك وفق آلية معتمدة تضمن السرية والامتثال للأنظمة المعمول بها في المملكة العربية السعودية.`}
             buttonText="تقديم طلب رسمي للاطلاع"
             buttonIcon={<MdOutlinePhoneInTalk size={20} />}
+            onClick={handleClick}
           />
         </div>
       </div>

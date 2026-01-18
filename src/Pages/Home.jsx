@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Hero from "../Components/Hero";
 import About from "../Components/About";
 import OurService from "../Components/OurService";
@@ -5,15 +6,22 @@ import Statistics from "../Components/Statistics";
 import RequestQuote from "../Components/RequestQuote";
 import Clients from "../Components/Clients";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
+import { useIslandQuery } from "../hooks/queries/useIslandQuery.js";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+  const { data } = useIslandQuery();
+  const navigate = useNavigate();
+
   function handleClick() {
-    console.log("home");
+    navigate("/contact-us#order");
   }
   return (
     <section className="flex flex-col items-center">
       <Hero />
-      <About />
+
+      <About data={data?.data} />
+
       <OurService />
       <Statistics />
       <div className="mt-10 w-full ">

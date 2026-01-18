@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Image from "../assets/Subtract.png";
 import { IoPlayCircleOutline } from "react-icons/io5";
 
-export default function About() {
+export default function About({ data }) {
   const fadeInRight = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
@@ -28,17 +28,11 @@ export default function About() {
             نبذة عنا
           </h2>
           <p className="text-dark-grey text-sm sm:text-base md:text-lg leading-relaxed mb-6 md:mb-8">
-            شركة سعودية متخصصة في تقديم حلول متكاملة تشمل إدارة المرافق، تكامل
-            الأنظمة، والتشغيل والصيانة، نعمل على دعم الجهات الحكومية والقطاع
-            الخاص من خلال منظومة تشغيل ذكية، آمنة، ومستدامة.
+            {data?.description}
           </p>
 
           <ul className="space-y-3 md:space-y-4">
-            {[
-              "خبرات متعددة القطاعات",
-              "الالتزام بالمعايير والأنظمة السعودية",
-              "حلول تشغيل متكاملة",
-            ].map((item, index) => (
+            {data?.highlights.map((item, index) => (
               <motion.li
                 key={index}
                 initial={{ opacity: 0, x: 20 }}
@@ -73,13 +67,12 @@ export default function About() {
   "
         >
           <img
-            src={Image}
+            src={data?.image_url}
             alt="About Thibat"
-            className="w-full h-auto object-cover "
+            className="w-full h-auto object-cover rounded-2xl"
           />
 
-          {/* Play Icon */}
-          <div
+          {/* <div
             className="
       absolute
       bottom-0 right-0
@@ -101,7 +94,7 @@ mx-4
     "
           >
             <IoPlayCircleOutline className="text-white" size={28} />
-          </div>
+          </div> */}
         </motion.div>
       </div>
     </section>

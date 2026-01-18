@@ -8,6 +8,7 @@ import RequestQuote from "../Components/RequestQuote";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import BMSSection from "../Components/BMSSection";
 import GraphFlow from "../Components/GraphFlow.jsx";
+import { useNavigate } from "react-router-dom";
 
 // Animation variants
 const bounceVariants = {
@@ -48,6 +49,11 @@ const FeatureItem = ({ text, delay = 0 }) => (
 );
 
 export default function SystemIntegration() {
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/contact-us#contact");
+  }
   const surveillanceFeatures = [
     "كاميرات مراقبة بدقة 4K من : Hikvision | Avigilon | Axis | Dahua",
     "أنظمة التعرف على لوحات المركبات (LPR/ANPR)",
@@ -165,6 +171,7 @@ export default function SystemIntegration() {
           <RequestQuote
             title="خلّي أنظمتك تشتغل مع بعض… مش كل نظام لوحده"
             buttonText="تواصل مع فريق تكامل الأنظمة"
+            onClick={handleClick}
             buttonIcon={<MdOutlinePhoneInTalk size={20} />}
           />
         </motion.div>

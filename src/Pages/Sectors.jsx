@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
 import ServiceCard from "../Components/ui/ServiceCard";
-import { service } from "../data/data";
+// import { service } from "../data/data";
 import ModernProcess from "../Components/ModernProcess.jsx";
+import useSectorsQuery from "../hooks/queries/sectors/useSectorsQuery.js";
 
 export default function Sectors() {
+  const { data } = useSectorsQuery();
   return (
     <section className="flex flex-col items-center justify-center text-center">
       <motion.div
@@ -45,7 +47,7 @@ export default function Sectors() {
             },
           }}
         >
-          {service.map((item, index) => (
+          {data?.data.map((item, index) => (
             <ServiceCard key={item.id} item={item} index={index} />
           ))}
         </motion.div>

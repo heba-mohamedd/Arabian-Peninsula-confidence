@@ -1,16 +1,44 @@
-import React from "react";
 import { motion } from "framer-motion";
-import Title from "../Components/ui/Title";
-import Header from "./../Components/ui/Header";
-import AboutUsIamge from "../assets/Group 21.png";
-import { MdOutlineRemoveRedEye } from "react-icons/md";
-import FeatureCard from "../Components/FeatureCard.jsx";
-import { LuMessageSquareMore, LuMessagesSquare } from "react-icons/lu";
-import ImageDivider from "../assets/Group 1 (1).png";
-import bottomImge from "../assets/bottomImage.png";
-import ModernProcess from "../Components/ModernProcess.jsx";
 
-// Animation variants
+import Title from "../Components/ui/Title";
+import Header from "../Components/ui/Header";
+import FeatureCard from "../Components/FeatureCard";
+import ModernProcess from "../Components/ModernProcess";
+
+import AboutUsImage from "../assets/Group 21.png";
+import BottomImage from "../assets/bottomImage.png";
+
+import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { LuMessageSquareMore } from "react-icons/lu";
+
+const aboutFeatures = [
+  {
+    title: "رؤيتنا",
+    description:
+      "أن نكون شريكًا موثوقًا في إدارة وتشغيل القطاعات الحيوية على مستوى المملكة.",
+    cardColor: "bg-primary/5",
+    headerColor: "bg-primary/10",
+    icon: <MdOutlineRemoveRedEye size={30} color="#00963F" />,
+  },
+  {
+    title: "رسالتنا",
+    description:
+      "تقديم حلول تشغيلية متكاملة تحقق الكفاءة والاستدامة وتلتزم بالأنظمة والمعايير المعتمدة.",
+    cardColor: "bg-neutral/20",
+    headerColor: "bg-neutral/30",
+    icon: <LuMessageSquareMore size={30} />,
+  },
+  {
+    title: "قيمنا",
+    description: `الجودة
+الالتزام
+الشفافية`,
+    cardColor: "bg-neutral/10",
+    headerColor: "bg-neutral/20",
+    icon: <LuMessageSquareMore size={30} />,
+  },
+];
+
 const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
@@ -38,11 +66,12 @@ export default function AboutUs() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="flex flex-col items-center justify-center"
+      className="flex flex-col items-center"
     >
       <Title title="من نحن" />
 
       <div className="container max-w-7xl mx-auto px-4">
+        {/* ===== About Header ===== */}
         <motion.div
           className="my-8"
           initial={{ y: -20, opacity: 0 }}
@@ -53,16 +82,18 @@ export default function AboutUs() {
             title="من نحن - تعرف على الكيان"
             description="تأسست الشركة لتكون كيانًا مهنيًا يقدم حلولًا متكاملة في عدد من القطاعات الحيوية، مع الالتزام بتطبيق أعلى المعايير التشغيلية والإدارية، وتقديم خدمات تلبي احتياجات الجهات الحكومية والشركات الكبرى."
           />
-          <motion.div
+
+          <motion.img
+            src={AboutUsImage}
+            alt="About us"
             initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-          >
-            <img src={AboutUsIamge} alt="AboutUsIamge" />
-          </motion.div>
+          />
         </motion.div>
 
+        {/* ===== Features ===== */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8"
           variants={staggerContainer}
@@ -70,39 +101,14 @@ export default function AboutUs() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          <motion.div variants={cardVariants}>
-            <FeatureCard
-              title="رؤيتنا"
-              description="أن نكون شريكًا موثوقًا في إدارة وتشغيل القطاعات الحيوية على مستوى المملكة."
-              cardColor="bg-primary/5"
-              headerColor="bg-primary/10"
-              icon={<MdOutlineRemoveRedEye size={30} color="#00963F" />}
-            />
-          </motion.div>
-
-          <motion.div variants={cardVariants}>
-            <FeatureCard
-              title="رسالتنا"
-              description="تقديم حلول تشغيلية متكاملة تحقق الكفاءة والاستدامة وتلتزم بالأنظمة والمعايير المعتمدة."
-              cardColor="bg-neutral/20"
-              headerColor="bg-neutral/30"
-              icon={<LuMessageSquareMore size={30} />}
-            />
-          </motion.div>
-
-          <motion.div variants={cardVariants}>
-            <FeatureCard
-              title="قيمنا"
-              description={`الجودة
-الالتزام
-الشفافية`}
-              cardColor="bg-neutral/10"
-              headerColor="bg-neutral/20"
-              icon={<LuMessageSquareMore size={30} />}
-            />
-          </motion.div>
+          {aboutFeatures.map((feature, index) => (
+            <motion.div key={index} variants={cardVariants}>
+              <FeatureCard {...feature} />
+            </motion.div>
+          ))}
         </motion.div>
 
+        {/* ===== Process ===== */}
         <motion.div
           className="my-7"
           initial={{ opacity: 0, y: 40 }}
@@ -119,15 +125,16 @@ export default function AboutUs() {
         </motion.div>
       </div>
 
-      <motion.div
-        className="w-full"
+      {/* ===== Bottom Image ===== */}
+      <motion.img
+        src={BottomImage}
+        alt="Bottom"
+        className="w-full mb-15"
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-      >
-        <img src={bottomImge} alt="imege" className="w-full mb-15" />
-      </motion.div>
+      />
     </motion.section>
   );
 }

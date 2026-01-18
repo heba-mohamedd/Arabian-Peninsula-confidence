@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ServiceCard from "./ui/ServiceCard";
-import { service } from "../data/data";
+import useSectorsQuery from "../hooks/queries/sectors/useSectorsQuery.js";
 
 // Variants للـ Framer Motion
 const containerVariants = {
@@ -14,6 +14,9 @@ const containerVariants = {
 };
 
 const OurService = React.memo(function OurService() {
+  const { data } = useSectorsQuery();
+  console.log(data);
+
   return (
     <section className="container max-w-7xl py-6 overflow-hidden mx-auto my-5">
       <div className="flex flex-col justify-center items-center px-4 sm:px-6 md:px-0 mb-8">
@@ -33,7 +36,7 @@ const OurService = React.memo(function OurService() {
         initial="hidden"
         animate="visible"
       >
-        {service.slice(0, 3).map((item) => (
+        {data?.data?.slice(0, 3).map((item) => (
           <ServiceCard item={item} key={item.id} />
         ))}
       </motion.div>

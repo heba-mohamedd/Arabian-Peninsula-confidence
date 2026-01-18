@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
-
 import Header from "./ui/Header";
-import { logos } from "../data/data";
+import { useClientsQuery } from "../hooks/queries/useClientsQuery.js";
 
 const Clients = React.memo(function Clients() {
+  const { data } = useClientsQuery();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -48,9 +49,9 @@ const Clients = React.memo(function Clients() {
           viewport={{ once: true }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6"
         >
-          {logos.map((img, index) => (
+          {data?.data.map((item, index) => (
             <motion.div
-              key={index}
+              key={item.id}
               variants={itemVariants}
               className={`
                 flex items-center justify-center
@@ -59,7 +60,7 @@ const Clients = React.memo(function Clients() {
               `}
             >
               <img
-                src={img}
+                src={item.logo_url}
                 alt={`logo-${index}`}
                 loading="lazy"
                 className="w-full h-24 object-contain"

@@ -5,6 +5,9 @@ import Header from "../Components/ui/Header";
 import CertificatCard from "../Components/CertificatCard";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import RequestQuote from "../Components/RequestQuote";
+import { useCertificatesQuery } from "../hooks/queries/useCertificatesQuery.js";
+import { useNavigate } from "react-router-dom";
+
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -30,16 +33,13 @@ const cardVariants = {
   },
 };
 
-const certificates = [
-  "ISO 9001",
-  "ISO 14001",
-  "ISO 45001",
-  "ISO 22000",
-  "ISO 27001",
-  "ISO 50001",
-];
-
 export default function Certificates() {
+  const { data } = useCertificatesQuery();
+  const navigate = useNavigate();
+
+  function handleClick() {
+    navigate("/contact-us#order");
+  }
   return (
     <motion.section
       variants={containerVariants}
@@ -63,16 +63,16 @@ export default function Certificates() {
           viewport={{ once: true }}
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mt-12"
         >
-          {certificates.map((item, index) => (
+          {data?.data.map((item) => (
             <motion.div
-              key={item + index}
+              key={item.id}
               variants={cardVariants}
               whileHover={{
                 y: -4,
                 transition: { duration: 0.2 },
               }}
             >
-              <CertificatCard certificat={item} />
+              <CertificatCard item={item} />
             </motion.div>
           ))}
         </motion.div>
@@ -87,6 +87,7 @@ export default function Certificates() {
           <RequestQuote
             description="نعمل وفق نموذج تشغيلي معتمد يضمن الكفاءة والاستمرارية في مختلف القطاعات. تواصلوا معنا لمناقشة فرص التعاون واستكشاف الحلول المناسبة لأعمالكم."
             buttonText="تواصل معنا"
+            onClick={handleClick}
             buttonIcon={<MdOutlinePhoneInTalk size={20} />}
           />
         </motion.div>

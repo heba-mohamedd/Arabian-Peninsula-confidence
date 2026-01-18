@@ -3,12 +3,15 @@ import { Suspense } from "react";
 import "./App.css";
 import { router } from "./routes";
 import LoadingSpinner from "./Components/LoadingSpinner";
+import ReactQueryProvider from "./providers/ReactQueryProvider.jsx";
 
 function App() {
   return (
-    <Suspense fallback={<LoadingSpinner />}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <ReactQueryProvider>
+      <Suspense fallback={<LoadingSpinner />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </ReactQueryProvider>
   );
 }
 

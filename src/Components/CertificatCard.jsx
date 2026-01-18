@@ -1,6 +1,4 @@
-import React from "react";
 import { motion } from "framer-motion";
-import certificateLogo from "../assets/certificateLogo.png";
 import flag from "../assets/Flag.png";
 
 const cardVariants = {
@@ -21,7 +19,7 @@ const flagVariants = {
   },
 };
 
-export default function CertificatCard({ certificat }) {
+export default function CertificatCard({ item }) {
   return (
     <motion.div
       className="relative flex flex-col justify-between h-auto rounded-xl shadow-sm overflow-hidden"
@@ -43,7 +41,7 @@ export default function CertificatCard({ certificat }) {
       {/* Certificate Logo */}
       <div className="flex items-center justify-center flex-1 bg-white">
         <motion.img
-          src={certificateLogo}
+          src={item?.image}
           alt="certificate logo"
           className="object-cover"
           whileHover={{ scale: 1.05 }}
@@ -54,7 +52,7 @@ export default function CertificatCard({ certificat }) {
       {/* Footer */}
       <div className="bg-neutral-200 flex justify-center items-center px-4 py-3">
         <p className="text-dark-grey px-3">إدارة الجودة</p>
-        <p className="font-medium">{certificat}</p>
+        <p className="font-medium">{item?.name}</p>
       </div>
     </motion.div>
   );

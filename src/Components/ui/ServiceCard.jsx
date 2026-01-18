@@ -24,9 +24,12 @@ const ServiceCard = React.memo(({ item }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <Link to={`/SectorDetails/${item.id}`}>
+    <Link to={`/SectorDetails/${item?.id}`}>
       <motion.div
         variants={cardVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
         whileHover={{
           y: -12,
           scale: 1.03,
@@ -46,31 +49,30 @@ const ServiceCard = React.memo(({ item }) => {
         <Card
           hoverable
           cover={
-            <div className="overflow-hidden relative">
+            <div className="overflow-hidden relative h-80">
               <motion.img
                 draggable={false}
-                alt={item.title}
-                src={item.src}
-                className="w-full h-48 sm:h-52 md:h-56 object-cover"
+                alt={item?.name}
+                src={item?.image_url}
+                className="w-full h-full object-cover"
                 loading="lazy"
                 animate={{
-                  scale: isHovered ? 1.1 : 1,
+                  scale: isHovered ? 1.05 : 1,
                 }}
-                transition={{ duration: 0.4, ease: "easeOut" }}
               />
-              <motion.div
+              {/* <motion.div
                 className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isHovered ? 1 : 0 }}
                 transition={{ duration: 0.3 }}
-              />
+              /> */}
             </div>
           }
           className="text-center h-full relative overflow-hidden"
         >
           <div className="flex flex-col items-center justify-center gap-2">
             <Meta
-              title={<span className="text-sm md:text-base">{item.title}</span>}
+              title={<span className="text-sm md:text-base">{item?.name}</span>}
             />
             <motion.div
               animate={{
