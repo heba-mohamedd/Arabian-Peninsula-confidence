@@ -14,13 +14,13 @@ export default function Title({ title }) {
         <div className="flex w-full items-center gap-2 text-xl pointer-events-auto px-12">
           <button
             onClick={() => navigate("/")}
-            className="text-dark-grey border bg-transparent border-none p-0 cursor-pointer"
+            className="text-dark-grey border bg-transparent border-none p-0 cursor-pointer text-lg md:text-xl"
           >
             الرئيسية
           </button>
 
           <MdOutlineArrowLeft size={35} color="#00963F" />
-          <p>{title}</p>
+          <p className="text-lg md:text-xl">{title}</p>
         </div>
       </div>
     </div>
