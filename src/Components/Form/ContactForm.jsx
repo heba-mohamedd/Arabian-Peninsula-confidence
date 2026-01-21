@@ -4,18 +4,38 @@ import { Input, Button, ConfigProvider } from "antd";
 import { contactSchema } from "../../Schema/contactSchema.jsx";
 import PrimaryButton from "./../ui/PrimaryButton";
 import { VscSend } from "react-icons/vsc";
+import { useSendMessage } from "../../hooks/contactUs/useSendMessage.js";
+import { toast } from "react-toastify";
 
 export default function ContactForm() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(contactSchema),
+    mode: "onChange",
+    defaultValues: {
+      fullName: "",
+      email: "",
+      message: "",
+      phone: "",
+    },
   });
 
+  const { mutate: sendMessage, isPending } = useSendMessage();
+
   const onSubmit = (data) => {
-    console.log(data);
+    sendMessage(data, {
+      onSuccess: () => {
+        toast.success("تــم الارســـال بنجاح");
+        reset();
+      },
+      onError: () => {
+        toast.error("حــدث خطأ اثناء الارسال حاول مرة اخرى ");
+      },
+    });
   };
 
   return (
@@ -34,14 +54,14 @@ export default function ContactForm() {
         <div className="flex flex-col gap-2">
           <label className="text-black font-medium">الاسم بالكامل</label>
           <Controller
-            name="name"
+            name="fullName"
             control={control}
             render={({ field }) => (
               <Input {...field} size="large" className="hover:border-primary" />
             )}
           />
-          {errors.name && (
-            <p className="text-red-500 text-sm">{errors.name.message}</p>
+          {errors.fullName && (
+            <p className="text-red-500 text-sm">{errors.fullName.message}</p>
           )}
         </div>
 
@@ -97,6 +117,7 @@ export default function ContactForm() {
           <PrimaryButton
             text="ارسال"
             htmlType="submit"
+            loading={isPending}
             icon={<VscSend size={20} className="rotate-180" />}
           />
         </div>

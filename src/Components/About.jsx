@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "../assets/Subtract.png";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import ImageSkeleton from "./ui/skeletons/ImageSkeleton";
+import TextSkeleton from "./ui/skeletons/TextSkeleton";
 
 export default function About({ data }) {
   const fadeInRight = {
@@ -13,6 +15,26 @@ export default function About({ data }) {
     hidden: { opacity: 0, x: -50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
   };
+
+  // Show skeleton if data is not available
+  if (!data) {
+    return (
+      <section className="container max-w-7xl mx-auto py-12 overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="text-start px-7">
+            <div className="h-10 w-48 bg-gray-200 rounded mb-6 skeleton-shimmer"></div>
+            <TextSkeleton lines={4} />
+            <div className="space-y-3 mt-6">
+              <TextSkeleton lines={3} width="90%" />
+            </div>
+          </div>
+          <div className="flex justify-center mx-auto w-full px-4 max-w-sm sm:max-w-md lg:max-w-lg">
+            <ImageSkeleton height="400px" className="rounded-2xl" />
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className=" container max-w-7xl mx-auto  py-12 overflow-hidden ">

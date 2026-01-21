@@ -54,18 +54,17 @@ const ServiceCard = React.memo(({ item }) => {
                 draggable={false}
                 alt={item?.name}
                 src={item?.image_url}
-                className="w-full h-full object-cover"
+                style={{
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  width: "100%",
+                  height: "100%",
+                }}
                 loading="lazy"
                 animate={{
                   scale: isHovered ? 1.05 : 1,
                 }}
               />
-              {/* <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isHovered ? 1 : 0 }}
-                transition={{ duration: 0.3 }}
-              /> */}
             </div>
           }
           className="text-center h-full relative overflow-hidden"
@@ -89,7 +88,6 @@ const ServiceCard = React.memo(({ item }) => {
             </motion.div>
           </div>
 
-          {/* Shimmer effect on hover */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
             initial={{ x: "-100%" }}

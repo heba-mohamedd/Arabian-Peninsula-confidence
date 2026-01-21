@@ -41,7 +41,7 @@ function CircleCard({
         flex flex-col items-center text-center gap-4
         max-w-xs mx-auto
         ${className}
-        ${offset ? "mt-20 md:mt-[300px]" : ""}
+        ${offset ? "mt-8 md:mt-10" : ""}
       `}
     >
       {!imageUP && <CircleNumber stepNumber={stepNumber} color={color} />}

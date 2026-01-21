@@ -1,0 +1,143 @@
+/* Modern Page Loader Styles */
+.page-loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(0, 150, 63, 0.05) 0%, rgba(0, 255, 135, 0.05) 100%);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modern Loader */
+.modern-loader {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner Rings */
+.spinner-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid transparent;
+}
+
+.spinner-ring:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  border-top-color: #00963F;
+  animation: rotate 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+.spinner-ring:nth-child(2) {
+  width: 80%;
+  height: 80%;
+  border-right-color: #00FF87;
+  animation: rotate 2s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+  animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+  width: 60%;
+  height: 60%;
+  border-bottom-color: #30F7C3;
+  animation: rotate 2.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loader Content */
+.loader-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Logo */
+.loader-logo {
+  width: 60px;
+  height: 60px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.loader-logo svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 8px rgba(0, 150, 63, 0.3));
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Loading Text */
+.loader-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #00963F;
+  letter-spacing: 0.5px;
+  animation: fadeInOut 2s ease-in-out infinite;
+  text-align: center;
+  direction: rtl;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .modern-loader {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .loader-logo {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .loader-text {
+    font-size: 14px;
+  }
+}

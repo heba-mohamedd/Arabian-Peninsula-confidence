@@ -12,7 +12,7 @@ const cardVariants = {
 
 const FeatureCard = ({
   title,
-  description,
+  points = [],
   icon,
   headerColor = "",
   cardColor = "",
@@ -20,7 +20,7 @@ const FeatureCard = ({
 }) => {
   return (
     <motion.div
-      className={`${cardColor} rounded-lg flex flex-col gap-5 h-60`}
+      className={`${cardColor} rounded-lg flex flex-col gap-3 min-h-60 `}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -44,10 +44,18 @@ const FeatureCard = ({
         {icon}
       </motion.div>
 
-      {/* Description */}
-      <p className="text-dark-grey leading-relaxed mx-5 mb-5 whitespace-pre-line">
-        {description}
-      </p>
+      {/* Points List */}
+      <ul className="space-y-2">
+        {points?.map((point, index) => (
+          <li
+            key={index}
+            className="text-dark-grey leading-relaxed mx-5 text-sm flex items-start gap-2"
+          >
+            <span className="text-primary mt-1">•</span>
+            <span>{point}</span>
+          </li>
+        ))}
+      </ul>
     </motion.div>
   );
 };

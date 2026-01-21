@@ -3,8 +3,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoAlbumsOutline } from "react-icons/io5";
 import footerimage from "../assets/236627169d5a53522a3134e218015a0810d64acb.png";
+import { useNavigate } from "react-router-dom";
+
 export default function Footer() {
   const [isOpened, setIsOpend] = useState(true);
+  const navigate = useNavigate();
   return (
     <footer className="bg-secondary text-[#B8B8B8]">
       <motion.div
@@ -57,9 +60,19 @@ export default function Footer() {
                 <IoAlbumsOutline className="flex-shrink-0" />
                 <p>الخدمات</p>
               </div>
-              <ul className="space-y-2 list-disc pe-5 text-sm md:text-base">
-                <li>إدارة المرافق</li>
-                <li>تكامل الأنظمة</li>
+              <ul className="space-y-2 list-disc px-5 text-sm md:text-base">
+                <li
+                  className="cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate("/facility-management")}
+                >
+                  إدارة المرافق
+                </li>
+                <li
+                  className="cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate("/system-integration")}
+                >
+                  تكامل الأنظمة
+                </li>
                 <li>الحلول الذكية</li>
                 <li>التشغيل والصيانة</li>
               </ul>
@@ -74,11 +87,31 @@ export default function Footer() {
                 <IoAlbumsOutline className="flex-shrink-0" />
                 <p>القطاعات</p>
               </div>
-              <ul className="space-y-2 list-disc pe-5 text-sm md:text-base">
-                <li>الجهات الحكومية</li>
-                <li>المستشفيات</li>
-                <li>المنشآت الصناعية</li>
-                <li>المطارات والموانئ</li>
+              <ul className="space-y-2 list-disc px-5 text-sm md:text-base">
+                <li
+                  onClick={() => {
+                    navigate("/sectors#operational-sectors");
+                  }}
+                  className="cursor-pointer hover:text-primary transition-colors"
+                >
+                  القطاعات التشغيلية والخدمية
+                </li>
+                <li
+                  onClick={() => {
+                    navigate("/sectors#security-sectors");
+                  }}
+                  className="cursor-pointer hover:text-primary transition-colors"
+                >
+                  القطاعات الأمنية
+                </li>
+                <li
+                  onClick={() => {
+                    navigate("/sectors#health-sectors");
+                  }}
+                  className="cursor-pointer hover:text-primary transition-colors"
+                >
+                  القطاعات الصحية
+                </li>
               </ul>
             </motion.div>
 
@@ -91,9 +124,19 @@ export default function Footer() {
                 <IoAlbumsOutline className="flex-shrink-0" />
                 <p>تواصل معنا</p>
               </div>
-              <ul className="space-y-2 list-disc pe-5 text-sm md:text-base">
-                <li>من نحن</li>
-                <li>مساعدة</li>
+              <ul className="space-y-2 list-disc px-5 text-sm md:text-base">
+                <li
+                  className="cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate("/about-us")}
+                >
+                  من نحن
+                </li>
+                <li
+                  className="cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate("/contact-us")}
+                >
+                  مساعدة
+                </li>
               </ul>
             </motion.div>
           </motion.div>

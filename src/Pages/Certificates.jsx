@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
 import CertificatCard from "../Components/CertificatCard";
+import PageLoader from "../Components/ui/PageLoader";
+import CardSkeleton from "../Components/ui/skeletons/CardSkeleton";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import RequestQuote from "../Components/RequestQuote";
 import { useCertificatesQuery } from "../hooks/queries/useCertificatesQuery.js";
@@ -34,8 +36,14 @@ const cardVariants = {
 };
 
 export default function Certificates() {
-  const { data } = useCertificatesQuery();
+  const { data, isLoading } = useCertificatesQuery();
   const navigate = useNavigate();
+  console.log(data?.data);
+
+  // Show page loader while data is loading
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   function handleClick() {
     navigate("/contact-us#order");

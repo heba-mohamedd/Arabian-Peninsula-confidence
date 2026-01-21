@@ -1,10 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Header from "./ui/Header";
+import CardSkeleton from "./ui/skeletons/CardSkeleton";
 import { useClientsQuery } from "../hooks/queries/useClientsQuery.js";
 
 const Clients = React.memo(function Clients() {
-  const { data } = useClientsQuery();
+  const { data, isLoading } = useClientsQuery();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -25,21 +26,44 @@ const Clients = React.memo(function Clients() {
     },
   };
 
+  // Show skeleton while loading
+  if (isLoading) {
+    return (
+      <section className="overflow-hidden py-12">
+        <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
+          <div className="flex flex-col justify-center items-center mb-12">
+            <div className="h-10 w-64 bg-gray-200 rounded mb-4 skeleton-shimmer"></div>
+            <div className="h-6 w-96 bg-gray-200 rounded skeleton-shimmer"></div>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6">
+            {Array.from({ length: 8 }).map((_, index) => (
+              <div key={index} className="flex items-center justify-center">
+                <div className="w-full h-24 bg-gray-200 rounded skeleton-shimmer"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="overflow-hidden py-12">
       <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-20">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col justify-center items-center mb-12"
-        >
-          <Header
-            title="عملاؤنا"
-            description="فخورون بالشراكة مع مجموعة من الجهات الحكومية والخاصة، في مختلف القطاعات."
-          />
-        </motion.div>
+        {data?.data && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col justify-center items-center mb-12"
+          >
+            <Header
+              title="عملاؤنا"
+              description="فخورون بالشراكة مع مجموعة من الجهات الحكومية والخاصة، في مختلف القطاعات."
+            />
+          </motion.div>
+        )}
 
         {/* Logos */}
         <motion.div

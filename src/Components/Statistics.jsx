@@ -1,17 +1,40 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useEffect } from "react";
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  animate,
+  useInView,
+} from "framer-motion";
 import { FaSquare } from "react-icons/fa";
 import bg from "../assets/statisticsBg.png";
 
 const StatCard = React.memo(({ value, label, index }) => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
+
   const offsets = [
     "md:-translate-y-10", // الأول فوق
     "md:translate-y-0", // التاني في النص
     "md:translate-y-10", // التالت تحت
   ];
 
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(count, parseInt(value), {
+        duration: 6,
+        ease: "easeOut",
+      });
+
+      return controls.stop;
+    }
+  }, [isInView, count, value]);
+
   return (
     <div
+      ref={ref}
       className={`
         flex-1 p-4 text-white
         transform transition-transform duration-300
@@ -26,9 +49,9 @@ const StatCard = React.memo(({ value, label, index }) => {
 
         <div className="flex flex-col items-center">
           <span className="text-lg md:text-2xl font-bold text-white/80">+</span>
-          <span className="text-xl md:text-3xl font-bold leading-none">
-            {value}
-          </span>
+          <motion.span className="text-xl md:text-3xl font-bold leading-none">
+            {rounded}
+          </motion.span>
         </div>
 
         <p className="text-[10px] md:text-lg whitespace-nowrap mt-1">{label}</p>

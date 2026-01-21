@@ -4,40 +4,16 @@ import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
 import FeatureCard from "../Components/FeatureCard";
 import ModernProcess from "../Components/ModernProcess";
+import PageLoader from "../Components/ui/PageLoader";
+import ImageSkeleton from "../Components/ui/skeletons/ImageSkeleton";
+import FeatureCardSkeleton from "../Components/ui/skeletons/FeatureCardSkeleton";
 
 import AboutUsImage from "../assets/Group 21.png";
 import BottomImage from "../assets/bottomImage.png";
 
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { LuMessageSquareMore } from "react-icons/lu";
-
-const aboutFeatures = [
-  {
-    title: "رؤيتنا",
-    description:
-      "أن نكون شريكًا موثوقًا في إدارة وتشغيل القطاعات الحيوية على مستوى المملكة.",
-    cardColor: "bg-primary/5",
-    headerColor: "bg-primary/10",
-    icon: <MdOutlineRemoveRedEye size={30} color="#00963F" />,
-  },
-  {
-    title: "رسالتنا",
-    description:
-      "تقديم حلول تشغيلية متكاملة تحقق الكفاءة والاستدامة وتلتزم بالأنظمة والمعايير المعتمدة.",
-    cardColor: "bg-neutral/20",
-    headerColor: "bg-neutral/30",
-    icon: <LuMessageSquareMore size={30} />,
-  },
-  {
-    title: "قيمنا",
-    description: `الجودة
-الالتزام
-الشفافية`,
-    cardColor: "bg-neutral/10",
-    headerColor: "bg-neutral/20",
-    icon: <LuMessageSquareMore size={30} />,
-  },
-];
+import { useAboutAsQuery } from "../hooks/queries/useAboutAsQuery.js";
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -61,6 +37,39 @@ const cardVariants = {
 };
 
 export default function AboutUs() {
+  const { data, isLoading } = useAboutAsQuery();
+  console.log(data);
+
+  // Show page loader while initial data is loading
+  if (isLoading) {
+    return <PageLoader />;
+  }
+
+  // Build aboutFeatures from API data
+  const aboutFeatures = [
+    {
+      title: "رؤيتنا",
+      points: data?.data?.vision?.map((item) => item.point) || [],
+      cardColor: "bg-primary/5",
+      headerColor: "bg-primary/10",
+      icon: <MdOutlineRemoveRedEye size={30} color="#00963F" />,
+    },
+    {
+      title: "رسالتنا",
+      points: data?.data?.mission?.map((item) => item.point) || [],
+      cardColor: "bg-neutral/20",
+      headerColor: "bg-neutral/30",
+      icon: <LuMessageSquareMore size={30} />,
+    },
+    {
+      title: "قيمنا",
+      points: data?.data?.values?.map((item) => item.point) || [],
+      cardColor: "bg-neutral/10",
+      headerColor: "bg-neutral/20",
+      icon: <LuMessageSquareMore size={30} />,
+    },
+  ];
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -80,22 +89,30 @@ export default function AboutUs() {
         >
           <Header
             title="من نحن - تعرف على الكيان"
-            description="تأسست الشركة لتكون كيانًا مهنيًا يقدم حلولًا متكاملة في عدد من القطاعات الحيوية، مع الالتزام بتطبيق أعلى المعايير التشغيلية والإدارية، وتقديم خدمات تلبي احتياجات الجهات الحكومية والشركات الكبرى."
+            description={data?.data?.description}
           />
-
-          <motion.img
-            src={AboutUsImage}
-            alt="About us"
-            initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
-            whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
-          />
+          <div className=" max-h-[400px] overflow-hidden rounded-lg mt-2">
+            <motion.img
+              src={data?.data?.image}
+              alt="About us"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                width: "100%",
+                height: "100%",
+                borderRadius: "10px",
+              }}
+              initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
+            />
+          </div>
         </motion.div>
 
         {/* ===== Features ===== */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 p-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 "
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
@@ -116,11 +133,11 @@ export default function AboutUs() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <Header
+          {/* <Header
             title="نموذج عملنا"
             description="نعتمد على نموذج تشغيلي موحد يتيح لنا إدارة قطاعات متعددة بكفاءة عالية، من خلال إدارة مركزية وفرق متخصصة لكل قطاع، مع تطبيق إجراءات تشغيل قياسية ومؤشرات أداء واضحة."
             titleColor="text-black"
-          />
+          /> */}
           <ModernProcess />
         </motion.div>
       </div>

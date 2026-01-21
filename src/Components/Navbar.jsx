@@ -1,6 +1,5 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Dropdown, Space } from "antd";
 import { GlobalOutlined, DownOutlined } from "@ant-design/icons";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import logo from "/Logo.png";
@@ -22,11 +21,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const items = [
-    { key: "1", label: "English" },
-    { key: "2", label: "العربية" },
-  ];
 
   const activeLink = useMemo(() => {
     const currentLink = navLinks.find(
@@ -76,16 +70,11 @@ const Navbar = () => {
       {/* Language Selector (Desktop) */}
       <div className="relative hidden lg:flex items-center h-full">
         <div
-          className="bg-primary flex items-center px-4 md:px-8 h-full text-white cursor-pointer"
+          className="bg-primary flex items-center px-5 md:px-10 gap-2 h-full text-white cursor-pointer"
           style={{ clipPath: "polygon(0% 0%, 80% 0%, 100% 100%, 0% 100%)" }}
         >
-          <Dropdown menu={{ items }} trigger={["click"]}>
-            <Space className="hover:opacity-80 transition-opacity text-xs md:text-base">
-              <DownOutlined className="text-xs" />
-              <span className="font-bold text-sm md:text-lg">العربية</span>
-              <GlobalOutlined className="text-lg md:text-xl" />
-            </Space>
-          </Dropdown>
+          <span className="font-bold text-sm md:text-lg">العربية</span>
+          <GlobalOutlined className="text-lg md:text-xl" />
         </div>
       </div>
 

@@ -6,10 +6,14 @@ import Title from "../Components/ui/Title";
 import Header from "../Components/ui/Header";
 import PrimaryButton from "../Components/ui/PrimaryButton";
 import RequestQuote from "../Components/RequestQuote";
+import PageLoader from "../Components/ui/PageLoader";
+import locateIcon from "../assets/Frame 29.png";
+import Steps from "./../Components/Steps";
+import { useSectorById } from "../hooks/queries/sectors/useSectorById.js";
 
 export default function SectorDetails() {
   const { id } = useParams();
-  const { data } = useSectorById(id);
+  const { data, isLoading } = useSectorById(id);
   const navigate = useNavigate();
 
   function handleClick() {
@@ -17,6 +21,11 @@ export default function SectorDetails() {
   }
   function handleContact() {
     navigate("/contact-us#contact");
+  }
+
+  // Show page loader while data is loading
+  if (isLoading) {
+    return <PageLoader />;
   }
 
   if (!data?.data) {
@@ -58,22 +67,27 @@ export default function SectorDetails() {
         </div>
 
         {/* Services */}
-        <div className="mb-10 w-full ">
-          <p className="text-2xl mb-4">خدماتنا في هذا القطاع</p>
+        {data?.data?.services && (
+          <div className=" w-full ">
+            <p className="text-2xl mb-4">خدماتنا في هذا القطاع</p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-7 ">
-            {data?.data?.services.map((text, index) => (
-              <SerCard key={index} text={text} />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-7 ">
+              {data?.data?.services.map((text, index) => (
+                <SerCard key={index} text={text} />
+              ))}
+            </div>
           </div>
-        </div>
-        <div className=" mb-10 w-full">
-          <p className=" text-center  text-2xl text-primary">
-            منهجيتنا في {data?.data?.name}
-          </p>
-
-          <Steps steps={data?.data?.methodologies} />
-        </div>
+        )}
+        {data?.data?.methodologies && (
+          <div className=" w-full my-10">
+            <p className=" text-center  text-2xl text-primary">
+              منهجيتنا في {data?.data?.name}
+            </p>
+            <div className="md:my-10">
+              <Steps steps={data?.data?.methodologies} />
+            </div>
+          </div>
+        )}
 
         {/* Quote */}
         <RequestQuote
@@ -86,11 +100,6 @@ export default function SectorDetails() {
     </section>
   );
 }
-
-import locateIcon from "../assets/Frame 29.png";
-
-import Steps from "./../Components/Steps";
-import { useSectorById } from "../hooks/queries/sectors/useSectorById.js";
 
 function SerCard({ text }) {
   return (

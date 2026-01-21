@@ -7,12 +7,14 @@ export default function PrimaryButton({
   className,
   style,
   htmlType = "button",
+  loading = false,
 }) {
   return (
     <Button
       type="primary"
       size="large"
       htmlType={htmlType}
+      loading={loading}
       className={`flex items-center gap-2 ${className}`}
       style={{
         backgroundColor: "#00963F",

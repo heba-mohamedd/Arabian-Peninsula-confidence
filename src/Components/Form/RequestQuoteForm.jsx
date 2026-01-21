@@ -4,18 +4,41 @@ import { Input, Select, ConfigProvider } from "antd";
 import { requestQuoteSchema } from "../../Schema/requestQuoteSchema.jsx"; // تأكد من إنشاء السكيما المناسبة
 import { VscSend } from "react-icons/vsc";
 import PrimaryButton from "../ui/PrimaryButton.jsx";
+import { useSendOffer } from "../../hooks/contactUs/useSendOffer.js";
+import { toast } from "react-toastify";
 
 export default function RequestQuoteForm() {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(requestQuoteSchema),
+    mode: "onChange",
+    defaultValues: {
+      fullName: "",
+      companyName: "",
+      phone: "",
+      email: "",
+      serviceType: "",
+      budget: "",
+      projectDescription: "",
+    },
   });
 
+  const { mutate: sendOffer, isPending } = useSendOffer();
+
   const onSubmit = (data) => {
-    console.log("Form Data:", data);
+    sendOffer(data, {
+      onSuccess: () => {
+        toast.success("تــم الارســـال بنجاح");
+        reset();
+      },
+      onError: () => {
+        toast.error("حــدث خطأ اثناء الارسال حاول مرة اخرى ");
+      },
+    });
   };
 
   return (
@@ -107,9 +130,9 @@ export default function RequestQuoteForm() {
                 {...field}
                 size="large"
                 options={[
-                  { value: "web", label: "تطوير مواقع" },
-                  { value: "mobile", label: "تطبيقات موبايل" },
-                  { value: "marketing", label: "تسويق إلكتروني" },
+                  { value: "financial", label: "القوائم الماليه" },
+                  { value: "facility", label: "اداره المرافق" },
+                  { value: "integration", label: "تكامل الانظمه" },
                 ]}
               />
             )}
@@ -173,6 +196,7 @@ export default function RequestQuoteForm() {
           <PrimaryButton
             text="ارسال طلب السعر"
             htmlType="submit"
+            loading={isPending}
             icon={<VscSend size={20} className="rotate-180" />}
           />
         </div>

@@ -7,8 +7,11 @@ import RequestQuoteForm from "../Components/Form/RequestQuoteForm.jsx";
 import Newsletter from "../Components/Form/Newsletter.jsx";
 import backgroundContantInformation from "../assets/contactInformation.png";
 import { useLocation } from "react-router-dom";
+import { useContactData } from "../hooks/contactUs/useContactData.js";
 export default function ContactUs() {
   const { hash } = useLocation();
+  const { data } = useContactData();
+  console.log(data?.data);
 
   useEffect(() => {
     if (!hash) return;
@@ -93,22 +96,18 @@ export default function ContactUs() {
             <div className="flex-1 text-center p-4">
               <p className="text-lg font-semibold mb-2">معلومات الاتصال</p>
               <p className="leading-relaxed text-sm">
-                نرحب بتواصلكم معنا لمناقشة متطلبات المشاريع أو الاستفسار عن
-                خدماتنا في مختلف القطاعات، وسيقوم فريقنا المختص بالتواصل معكم في
-                أقرب وقت.
+                {data?.data?.description}
               </p>
             </div>
 
             <div className="flex-1 text-center p-4">
               <p className="text-lg font-semibold mb-2">البريد الإلكتروني</p>
-              <p className="text-sm break-all">
-                Thaqaaljezerraelarabia@gmail.com
-              </p>
+              <p className="text-sm break-all">{data?.data?.email}</p>
             </div>
 
             <div className="flex-1 text-center p-4">
               <p className="text-lg font-semibold mb-2">رقم الهاتف</p>
-              <p className="text-sm">+69956454555</p>
+              <p className="text-sm">{data?.data?.phone}</p>
             </div>
           </div>
         </div>

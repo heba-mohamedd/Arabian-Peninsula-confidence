@@ -5,43 +5,21 @@ import { LuDot } from "react-icons/lu";
 import StepsSection from "../Components/StepsSection";
 import FinancialTimeline from "../Components/FinancialTimeline";
 import RequestQuote from "../Components/RequestQuote";
+import PageLoader from "../Components/ui/PageLoader";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import Header from "./../Components/ui/Header";
 import { useNavigate } from "react-router-dom";
-
-const financialStatements = [
-  {
-    title: "قائمة المركز المالي",
-    description: "توضح الأصول والالتزامات وحقوق الملكية.",
-  },
-  {
-    title: "قائمة الدخل",
-    description: "توضح نتائج الأداء المالي خلال الفترة.",
-  },
-  {
-    title: "قائمة التدفقات النقدية",
-    description: "توضح حركة النقد والتدفقات التشغيلية.",
-  },
-];
-const mySteps = [
-  {
-    id: 1,
-    title: "الخطوة الأولى",
-    description: "الوصف",
-    items: ["البند الأول", "البند الثاني", "البند الثالث"],
-  },
-  {
-    id: 2,
-    title: "الخطوة الثانية",
-    description: "الوصف",
-    items: ["البند الأول", "البند الثاني", "البند الثالث"],
-  },
-];
-
-<StepsSection steps={mySteps} />;
+import { useFinancialQuery } from "../hooks/queries/useFinancialQuery.js";
 
 export default function Financial() {
   const navigate = useNavigate();
+  const { data, isLoading } = useFinancialQuery();
+  console.log(data?.data);
+
+  // Show page loader while data is loading
+  if (isLoading) {
+    return <PageLoader />;
+  }
 
   function handleClick() {
     navigate("/contact-us#order");
@@ -58,20 +36,19 @@ export default function Financial() {
       <div className="container max-w-7xl mx-auto px-6 my-14 flex flex-col gap-5 ">
         {/* Intro */}
         <Header
-          title="القوائم المالية"
-          description="تمثل القوائم المالية أداة أساسية لقياس الأداء المالي للشركة، حيث يتم
-            إعدادها وفق المعايير المحاسبية المعتمدة وتعكس المركز المالي والنتائج
-            التشغيلية خلال الفترات المالية المختلفة.
-              لا يتم مشاركة القوائم المالية للأفراد أو الجهات غير ذات الصفة
-              النظامية."
+          title={data?.data?.name}
+          description={data?.data?.description}
         />
+        <span className="text-center text-sm leading-6 md:leading-8 max-w-3xl mx-auto">
+          {data?.data?.important_note}
+        </span>
         <div className="flex flex-col gap-5 mt-5">
           <p className="text-2xl font-normal text-center ">
             أنواع القوائم المالية
           </p>
 
           <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 ">
-            {financialStatements.map((item, index) => (
+            {data?.data?.types.map((item, index) => (
               <FinancialCard
                 key={index}
                 title={item.title}
@@ -85,13 +62,13 @@ export default function Financial() {
             آلية الاطلاع على القوائم المالية - وفق سياسات الحوكمة والسرية
             المعتمدة
           </p>
-          <StepsSection steps={mySteps} />
+          <StepsSection steps={data?.data?.work_mechanism} />
         </div>
         <div className="flex flex-col ">
           <p className="text-2xl font-normal text-center ">
             الفترات المالية المتاحة
           </p>
-          <FinancialTimeline />
+          <FinancialTimeline data={data?.data?.financial_periods} />
         </div>
         <div className="">
           <RequestQuote

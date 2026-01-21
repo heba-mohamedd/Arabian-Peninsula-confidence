@@ -2,18 +2,42 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, ConfigProvider } from "antd";
 import { MdOutlineMailOutline } from "react-icons/md"; // أيقونة البريد
-import * as yup from "yup";
 import PrimaryButton from "./../ui/PrimaryButton";
+import { useEnterEmailQuery } from "../../hooks/contactUs/useEnterEmailQuery";
+import * as yup from "yup";
+import { toast } from "react-toastify";
 
 const newsletterSchema = yup.object().shape({
-  email: yup.string().required("البريد مطلوب").email("بريد غير صحيح"),
+  email: yup.string().email("بريد غير صحيح"),
 });
+
 export default function Newsletter() {
-  const { control, handleSubmit } = useForm({
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(newsletterSchema),
+    mode: "onChange",
+    defaultValues: {
+      email: "",
+    },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const { mutate: enterEmail, isPending } = useEnterEmailQuery();
+
+  const onSubmit = (data) => {
+    enterEmail(data.email, {
+      onSuccess: () => {
+        toast.success("تــم الارســـال بنجاح");
+        reset();
+      },
+      onError: () => {
+        toast.error("حــدث خطأ اثناء الارسال حاول مرة اخرى ");
+      },
+    });
+  };
 
   return (
     <ConfigProvider
@@ -59,24 +83,39 @@ export default function Newsletter() {
           {/* حقل الإدخال والزر */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="w-full md:w-auto flex items-center bg-[#0A1F16] rounded-xl p-1 border border-gray-800"
+            className="w-full md:w-auto flex flex-col gap-2"
           >
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <Input
-                  {...field}
-                  variant="borderless"
-                  placeholder="ادخل بريدك الالكتروني"
-                  prefix={
-                    <MdOutlineMailOutline className="text-light-grey text-xl ml-2" />
-                  }
-                  className="custom-input bg-transparent  w-full md:w-[300px]"
-                />
-              )}
-            />
-            <PrimaryButton text="ارسال" htmlType="submit" />
+            <div className="flex items-center bg-[#0A1F16] rounded-xl p-1 border border-gray-800">
+              <Controller
+                name="email"
+                control={control}
+                render={({ field, fieldState: { error } }) => (
+                  <>
+                    <Input
+                      {...field}
+                      variant="borderless"
+                      placeholder="ادخل بريدك الالكتروني"
+                      status={error ? "error" : ""}
+                      prefix={
+                        <MdOutlineMailOutline className="text-light-grey text-xl ml-2" />
+                      }
+                      className="custom-input bg-transparent w-full md:w-[300px]"
+                    />
+                  </>
+                )}
+              />
+              <PrimaryButton
+                text="ارسال"
+                htmlType="submit"
+                loading={isPending}
+              />
+            </div>
+            {/* Error Message */}
+            {errors.email && (
+              <p className="text-red-500 text-sm text-right px-2 animate-pulse">
+                {errors.email.message}
+              </p>
+            )}
           </form>
         </div>
       </section>

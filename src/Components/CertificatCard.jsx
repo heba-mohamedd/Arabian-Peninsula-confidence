@@ -22,7 +22,7 @@ const flagVariants = {
 export default function CertificatCard({ item }) {
   return (
     <motion.div
-      className="relative flex flex-col justify-between h-auto rounded-xl shadow-sm overflow-hidden"
+      className="relative flex flex-col h-[400px] rounded-xl shadow-sm overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
@@ -34,23 +34,28 @@ export default function CertificatCard({ item }) {
       <motion.img
         src={flag}
         alt="flag"
-        className="absolute top-0 right-0 w-10"
+        className="absolute top-0 right-0 w-10 z-10"
         variants={flagVariants}
       />
 
       {/* Certificate Logo */}
-      <div className="flex items-center justify-center flex-1 bg-white">
+      <div className="flex-1 bg-white overflow-hidden relative">
         <motion.img
           src={item?.image}
           alt="certificate logo"
-          className="object-cover"
+          style={{
+            objectFit: "cover",
+            objectPosition: "center",
+            width: "100%",
+            height: "100%",
+          }}
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         />
       </div>
 
       {/* Footer */}
-      <div className="bg-neutral-200 flex justify-center items-center px-4 py-3">
+      <div className="bg-neutral-200 flex justify-center items-center px-4 py-3 min-h-[60px]">
         <p className="text-dark-grey px-3">إدارة الجودة</p>
         <p className="font-medium">{item?.name}</p>
       </div>

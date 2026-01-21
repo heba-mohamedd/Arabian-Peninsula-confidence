@@ -9,3 +9,8 @@ export const getSectorById = async (id) => {
   const response = await axiosInstance.get(`/api/sectors/${id}`);
   return response.data;
 };
+
+export const getHowWeWorkData = async () => {
+  const response = await axiosInstance.get(`/api/work-methods`);
+  return response.data;
+};

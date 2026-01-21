@@ -9,14 +9,14 @@ export default function StepsSection({ steps = [] }) {
     if (totalSteps === 4) return "md:grid-cols-4";
     if (totalSteps === 5) return "md:grid-cols-5";
     if (totalSteps === 6) return "md:grid-cols-6";
-    if (totalSteps === 7) return "md:grid-cols-7";
+    // if (totalSteps === 7) return "md:grid-cols-7";
     return "md:grid-cols-5"; // Default for more than 7
   };
 
   const gridCols = getGridCols(steps.length);
 
   return (
-    <section className="py-4 ">
+    <section className="my-5">
       <div className="max-w-7xl mx-auto px-6">
         {/* Desktop: Grid Layout */}
         <div

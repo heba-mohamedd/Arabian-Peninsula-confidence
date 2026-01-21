@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export default function HeaderOfServise({ title }) {
   return (
     <motion.div
-      className="bg-primary/10 text-center my-13"
+      className="bg-primary/10 text-center"
       initial={{ opacity: 0, y: -20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

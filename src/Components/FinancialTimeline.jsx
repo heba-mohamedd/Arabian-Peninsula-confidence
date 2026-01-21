@@ -3,17 +3,11 @@ import { Timeline } from "antd";
 import { AiOutlinePython } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-const FinancialTimeline = () => {
-  const yearsData = [
-    { year: "2022", status: "متاحة عند الطلب" },
-    { year: "2023", status: "متاحة عند الطلب" },
-    { year: "2024", status: "متاحة عند الطلب" },
-  ];
-
+const FinancialTimeline = ({ data }) => {
   return (
     <div className="mt-7   flex items-center  justify-center">
       <Timeline
-        items={yearsData.map((item, index) => ({
+        items={data?.map((item, index) => ({
           icon: (
             <motion.div
               initial={{ scale: 0.6, opacity: 0 }}
@@ -34,8 +28,8 @@ const FinancialTimeline = () => {
               viewport={{ once: true }}
               className="mr-5 mb-10 -mt-3 text-right"
             >
-              <h3 className="text-lg mb-1">السنة المالية {item.year}</h3>
-              <p className="text-dark-grey ">{item.status}</p>
+              <h3 className="text-lg mb-1">السنة المالية {item.period}</h3>
+              <p className="text-dark-grey ">متاحة عند الطلب</p>
             </motion.div>
           ),
         }))}
