@@ -15,7 +15,6 @@ const containerVariants = {
 
 const OurService = React.memo(function OurService() {
   const { data } = useSectorsQuery();
-  console.log(data);
 
   return (
     <section className="container max-w-7xl py-6 overflow-hidden mx-auto my-5">

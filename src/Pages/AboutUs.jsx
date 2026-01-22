@@ -38,7 +38,6 @@ const cardVariants = {
 
 export default function AboutUs() {
   const { data, isLoading } = useAboutAsQuery();
-  console.log(data);
 
   // Show page loader while initial data is loading
   if (isLoading) {

@@ -14,7 +14,6 @@ import { useFinancialQuery } from "../hooks/queries/useFinancialQuery.js";
 export default function Financial() {
   const navigate = useNavigate();
   const { data, isLoading } = useFinancialQuery();
-  console.log(data?.data);
 
   // Show page loader while data is loading
   if (isLoading) {

@@ -21,7 +21,6 @@ export default function Sectors() {
   );
   // القطاعات الصحية
   const healthSectors = data?.data.filter((item) => item.category.id === 3);
-  console.log(healthSectors);
 
   // Scroll to section when hash is present
   useEffect(() => {

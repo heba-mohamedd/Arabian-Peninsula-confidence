@@ -38,7 +38,6 @@ const cardVariants = {
 export default function Certificates() {
   const { data, isLoading } = useCertificatesQuery();
   const navigate = useNavigate();
-  console.log(data?.data);
 
   // Show page loader while data is loading
   if (isLoading) {

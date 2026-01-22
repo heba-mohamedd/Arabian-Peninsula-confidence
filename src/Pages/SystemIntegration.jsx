@@ -15,7 +15,6 @@ import SimpleList from "../Components/SimpleList.jsx";
 export default function SystemIntegration() {
   const navigate = useNavigate();
   const { data, isLoading } = useSystemIntegrationQuery();
-  console.log(data);
 
   // Show page loader while data is loading
   if (isLoading) {

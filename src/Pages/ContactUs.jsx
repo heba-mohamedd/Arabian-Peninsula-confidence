@@ -11,7 +11,6 @@ import { useContactData } from "../hooks/contactUs/useContactData.js";
 export default function ContactUs() {
   const { hash } = useLocation();
   const { data } = useContactData();
-  console.log(data?.data);
 
   useEffect(() => {
     if (!hash) return;

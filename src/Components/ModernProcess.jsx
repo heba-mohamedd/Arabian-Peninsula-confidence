@@ -60,7 +60,6 @@ const ModernProcess = () => {
     ...item,
     ...colorSchemes[index % colorSchemes.length], // Cycle through colors if more than 5 steps
   }));
-  console.log(steps);
 
   return (
     <div className="flex flex-col items-center gap-6">
