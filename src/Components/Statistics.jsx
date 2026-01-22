@@ -54,7 +54,7 @@ const StatCard = React.memo(({ value, label, index }) => {
           </motion.span>
         </div>
 
-        <p className="text-[10px] md:text-lg whitespace-nowrap mt-1">{label}</p>
+        <p className="text-[20px] md:text-lg whitespace-nowrap mt-1">{label}</p>
       </div>
     </div>
   );
