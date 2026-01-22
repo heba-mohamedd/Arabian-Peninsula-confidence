@@ -33,8 +33,11 @@ export default function Newsletter() {
         toast.success("تــم الارســـال بنجاح");
         reset();
       },
-      onError: () => {
-        toast.error("حــدث خطأ اثناء الارسال حاول مرة اخرى ");
+      onError: (error) => {
+        const serverMessage =
+          error?.response?.data?.message ||
+          "حــدث خطأ اثناء الارسال حاول مرة اخرى";
+        toast.error(serverMessage);
       },
     });
   };
@@ -99,7 +102,7 @@ export default function Newsletter() {
                       prefix={
                         <MdOutlineMailOutline className="text-light-grey text-xl ml-2" />
                       }
-                      className="custom-input bg-transparent w-full md:w-[300px]"
+                      className="custom-input bg-transparent [&_input]:!text-white w-full md:w-[300px] [&_input]:placeholder:!text-gray-400 text-white"
                     />
                   </>
                 )}

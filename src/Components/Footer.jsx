@@ -73,8 +73,12 @@ export default function Footer() {
                 >
                   تكامل الأنظمة
                 </li>
-                <li>الحلول الذكية</li>
-                <li>التشغيل والصيانة</li>
+                <li
+                  className="cursor-pointer hover:text-primary transition-colors"
+                  onClick={() => navigate("/financial")}
+                >
+                  القوائم الماليه
+                </li>
               </ul>
             </motion.div>
 

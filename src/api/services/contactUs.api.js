@@ -1,5 +1,9 @@
 import axiosInstance from "../axiosInstance.js";
 
+export const getBudget = async () => {
+  const { data } = await axiosInstance.get("/api/budget-ranges");
+  return data;
+};
 export const sendOffer = async (data) => {
   const response = await axiosInstance.post("/api/quote-requests", {
     full_name: data.fullName,

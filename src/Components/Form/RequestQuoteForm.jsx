@@ -6,6 +6,7 @@ import { VscSend } from "react-icons/vsc";
 import PrimaryButton from "../ui/PrimaryButton.jsx";
 import { useSendOffer } from "../../hooks/contactUs/useSendOffer.js";
 import { toast } from "react-toastify";
+import { useBudgetQuery } from "../../hooks/contactUs/useBudgetData.js";
 
 export default function RequestQuoteForm() {
   const {
@@ -26,8 +27,14 @@ export default function RequestQuoteForm() {
       projectDescription: "",
     },
   });
-
+  const { data: budgetData, isLoading } = useBudgetQuery();
   const { mutate: sendOffer, isPending } = useSendOffer();
+
+  const budgetOptions =
+    budgetData?.data?.map((item) => ({
+      value: item.id,
+      label: item.label,
+    })) || [];
 
   const onSubmit = (data) => {
     sendOffer(data, {
@@ -154,11 +161,9 @@ export default function RequestQuoteForm() {
               <Select
                 {...field}
                 size="large"
-                options={[
-                  { value: "small", label: "1,000 - 5,000" },
-                  { value: "medium", label: "5,000 - 10,000" },
-                  { value: "large", label: "أكثر من 10,000" },
-                ]}
+                placeholder="اختر الميزانية"
+                loading={isLoading}
+                options={budgetOptions}
               />
             )}
           />
