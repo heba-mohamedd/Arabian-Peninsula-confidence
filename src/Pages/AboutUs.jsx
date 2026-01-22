@@ -111,7 +111,7 @@ export default function AboutUs() {
 
         {/* ===== Features ===== */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 "
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

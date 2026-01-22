@@ -20,7 +20,7 @@ const FeatureCard = ({
 }) => {
   return (
     <motion.div
-      className={`${cardColor} rounded-lg flex flex-col gap-3 min-h-60 `}
+      className={`${cardColor} rounded-lg flex flex-col gap-3 h-full`}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
