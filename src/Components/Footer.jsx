@@ -63,19 +63,28 @@ export default function Footer() {
               <ul className="space-y-2 list-disc px-5 text-sm md:text-base">
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => navigate("/facility-management")}
+                  onClick={() => {
+                    navigate("/facility-management");
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   إدارة المرافق
                 </li>
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => navigate("/system-integration")}
+                  onClick={() => {
+                    navigate("/system-integration");
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   تكامل الأنظمة
                 </li>
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => navigate("/financial")}
+                  onClick={() => {
+                    navigate("/financial");
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   القوائم الماليه
                 </li>
@@ -95,6 +104,7 @@ export default function Footer() {
                 <li
                   onClick={() => {
                     navigate("/sectors#operational-sectors");
+                    window.scrollTo(0, 0);
                   }}
                   className="cursor-pointer hover:text-primary transition-colors"
                 >
@@ -103,6 +113,7 @@ export default function Footer() {
                 <li
                   onClick={() => {
                     navigate("/sectors#security-sectors");
+                    window.scrollTo(0, 0);
                   }}
                   className="cursor-pointer hover:text-primary transition-colors"
                 >
@@ -111,6 +122,7 @@ export default function Footer() {
                 <li
                   onClick={() => {
                     navigate("/sectors#health-sectors");
+                    window.scrollTo(0, 0);
                   }}
                   className="cursor-pointer hover:text-primary transition-colors"
                 >
@@ -131,13 +143,19 @@ export default function Footer() {
               <ul className="space-y-2 list-disc px-5 text-sm md:text-base">
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => navigate("/about-us")}
+                  onClick={() => {
+                    navigate("/about-us");
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   من نحن
                 </li>
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => navigate("/contact-us")}
+                  onClick={() => {
+                    navigate("/contact-us");
+                    window.scrollTo(0, 0);
+                  }}
                 >
                   مساعدة
                 </li>
