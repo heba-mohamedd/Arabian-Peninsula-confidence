@@ -78,7 +78,7 @@ const Clients = React.memo(function Clients() {
               key={item.id}
               variants={itemVariants}
               className={`
-                flex items-center justify-center border rounded-lg p-4 bg-white
+                flex items-center justify-center rounded-lg p-4   
                 ${index >= 4 ? "lg:translate-x-10" : ""}
               `}
             >
