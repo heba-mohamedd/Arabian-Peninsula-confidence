@@ -7,34 +7,6 @@ import { useFacilityServicesQuery } from "../hooks/queries/useFacilityServices.j
 import PageLoader from "../Components/ui/PageLoader.jsx";
 import ImageGallerySwiper from "../Components/ImageGallerySwiper.jsx";
 
-const services = [
-  {
-    title: "أنظمة التدفئة والتهوية وتكييف الهواء (HVAC): ",
-    description:
-      "تصميم وتوريد وتركيب أنظمة متكاملة لتكييف الهواء، تضمن تحسين جودة الهواء الداخلي ورفع مستوى الراحة الحرارية داخل المباني.",
-  },
-  {
-    title: "السخانات والمبردات: ",
-    description:
-      "تركيب وصيانة أنظمة التسخين والتبريد بكفاءة عالية، بما يضمن التشغيل المستمر وتوفير الطاقة.",
-  },
-  {
-    title: "أنظمة التدفئة والتهوية وتكييف الهواء (HVAC): ",
-    description:
-      "تصميم وتوريد وتركيب أنظمة متكاملة لتكييف الهواء، تضمن تحسين جودة الهواء الداخلي ورفع مستوى الراحة الحرارية داخل المباني.",
-  },
-  {
-    title: "السخانات والمبردات: ",
-    description:
-      "تركيب وصيانة أنظمة التسخين والتبريد بكفاءة عالية، بما يضمن التشغيل المستمر وتوفير الطاقة.",
-  },
-  {
-    title: "أنظمة التدفئة والتهوية وتكييف الهواء (HVAC): ",
-    description:
-      "تصميم وتوريد وتركيب أنظمة متكاملة لتكييف الهواء، تضمن تحسين جودة الهواء الداخلي ورفع مستوى الراحة الحرارية داخل المباني.",
-  },
-];
-
 // Main component
 export default function FacilityManagement() {
   const { data: facilityManagementData, isLoading } =
@@ -53,7 +25,7 @@ export default function FacilityManagement() {
     >
       <Title title="إدارة المرافق" />
 
-      <div className="flex flex-col gap-5 justify-center items-center w-full max-w-7xl mx-auto px-6  my-7">
+      <div className="flex flex-col gap-5 justify-center items-center w-full max-w-7xl mx-auto px-6  my-10">
         {/* Intro */}
         <IntroSection
           title={facilityManagementData?.data?.name}
@@ -98,16 +70,16 @@ const SystemSection = ({ typeSystem }) => (
       />
     )}
 
-    <ServicesDescription />
+    <ServicesDescription
+      typeDescription={typeSystem?.description}
+      services={typeSystem?.items}
+    />
   </section>
 );
 
-const ServicesDescription = () => (
+const ServicesDescription = ({ typeDescription, services }) => (
   <>
-    <p className="text-xl mb-6">
-      تقدّم شركة مدارات الوسط المحدودة خدمات شاملة ومتكاملة في مجال الأنظمة
-      الميكانيكية، والتي تشمل:
-    </p>
+    <p className="text-xl mb-6">{typeDescription}</p>
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {services.map((service, index) => (
         <ServiceCard service={service} key={index} />
@@ -122,10 +94,15 @@ function ServiceCard({ service }) {
     <div className="bg-neutral-200 p-5 rounded-xl shadow-sm hover:shadow-md transition">
       <p className="text-dark-grey leading-relaxed max-w-lg">
         <span className="font-semibold text-black block mb-1">
-          {service.title}
+          {service?.title}
         </span>
-        {service.description}
+        {service?.description}
       </p>
+      <ol className="list-decimal list-inside text-dark-grey leading-relaxed max-w-lg">
+        {service?.points?.map((point, index) => (
+          <li key={index}>{point?.point}</li>
+        ))}
+      </ol>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function ImageGallerySwiper({ images }) {
   }
 
   return (
-    <div className="w-full max-w-5xl mx-auto my-8">
+    <div className="w-full max-w-5xl mx-auto my-8 ">
       {/* Main Swiper */}
       <Swiper
         style={{
@@ -30,7 +30,7 @@ export default function ImageGallerySwiper({ images }) {
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="rounded-xl overflow-hidden mb-4 h-96 md:h-[400px]"
+        className="rounded-xl overflow-hidden mb-4 h-96 "
       >
         {images.map((imageUrl, index) => (
           <SwiperSlide key={`main-${index}`}>
@@ -38,7 +38,13 @@ export default function ImageGallerySwiper({ images }) {
               src={imageUrl}
               alt={`صورة ${index + 1}`}
               // className="w-full h-full object-cover"
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              // style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                width: "100%",
+                height: "100%",
+              }}
               loading="lazy"
             />
           </SwiperSlide>
@@ -54,7 +60,7 @@ export default function ImageGallerySwiper({ images }) {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="h-24 md:h-32"
+        className="h-24 md:h-25 "
         breakpoints={{
           320: {
             slidesPerView: 3,
@@ -68,11 +74,17 @@ export default function ImageGallerySwiper({ images }) {
         }}
       >
         {images.map((imageUrl, index) => (
-          <SwiperSlide key={`thumb-${index}`} className="cursor-pointer">
+          <SwiperSlide key={`thumb-${index}`} className="cursor-pointer ">
             <img
               src={imageUrl}
               alt={`معاينة ${index + 1}`}
-              className="w-full h-full object-contain rounded-lg hover:opacity-70 transition-opacity"
+              className="w-full h-full object-contain rounded-lg hover:opacity-70 transition-opacity "
+              style={{
+                objectFit: "cover",
+                objectPosition: "center",
+                width: "100%",
+                height: "100%",
+              }}
               loading="lazy"
             />
           </SwiperSlide>

@@ -11,7 +11,7 @@ export default function Title({ title }) {
       <img src={frame7} alt={title} className="w-full min-h-[150px]" />
 
       <div className="absolute  inset-0 flex items-center px-5 pointer-events-none">
-        <div className="flex w-full items-center gap-2 text-xl pointer-events-auto px-12">
+        <div className="flex w-full items-center gap-2 text-xl pointer-events-auto px-5">
           <button
             onClick={() => navigate("/")}
             className="text-dark-grey border bg-transparent border-none p-0 cursor-pointer text-lg md:text-xl"

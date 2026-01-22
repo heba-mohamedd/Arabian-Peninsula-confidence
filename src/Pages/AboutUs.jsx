@@ -146,7 +146,7 @@ export default function AboutUs() {
       <motion.img
         src={BottomImage}
         alt="Bottom"
-        className="w-full mb-15"
+        className="w-full mb-8 md:mb-15 "
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
