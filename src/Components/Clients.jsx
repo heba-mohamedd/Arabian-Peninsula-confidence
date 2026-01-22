@@ -78,16 +78,20 @@ const Clients = React.memo(function Clients() {
               key={item.id}
               variants={itemVariants}
               className={`
-                flex items-center justify-center
+                flex items-center justify-center border rounded-lg p-4 bg-white
                 ${index >= 4 ? "lg:translate-x-10" : ""}
-
               `}
             >
               <img
                 src={item.logo_url}
                 alt={`logo-${index}`}
                 loading="lazy"
-                className="w-full h-24 object-contain"
+                style={{
+                  width: "200px",
+                  height: "100px",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                }}
               />
             </motion.div>
           ))}
