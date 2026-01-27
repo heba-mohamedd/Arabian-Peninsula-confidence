@@ -13,14 +13,24 @@ export default function Sectors() {
   const { data, isLoading } = useSectorsQuery();
   const location = useLocation();
 
-  // القطاعات الأمنية
-  const securitySectors = data?.data.filter((item) => item.category.id === 2);
-  // القطاعات التشغيلية والخدمية
-  const operationalSectors = data?.data.filter(
-    (item) => item.category.id === 1,
-  );
-  // القطاعات الصحية
-  const healthSectors = data?.data.filter((item) => item.category.id === 3);
+  const groupedSectors = React.useMemo(() => {
+    if (!data?.data) return {};
+
+    return data.data.reduce((acc, item) => {
+      const category = item.category;
+
+      if (!acc[category.id]) {
+        acc[category.id] = {
+          id: category.id,
+          name: category.name,
+          sectors: [],
+        };
+      }
+
+      acc[category.id].sectors.push(item);
+      return acc;
+    }, {});
+  }, [data]);
 
   // Scroll to section when hash is present
   useEffect(() => {
@@ -64,14 +74,14 @@ export default function Sectors() {
         </motion.div>
 
         <div className="flex flex-col items-center gap-12 ">
-          {operationalSectors.length > 0 && (
+          {Object.values(groupedSectors).map((category) => (
             <div
-              id="operational-sectors"
-              className="flex flex-col items-center gap-5 "
+              key={category.id}
+              id={`category-${category.id}`}
+              className="flex flex-col items-center gap-5"
             >
-              <p className="text-2xl font-bold mb-4 ">
-                القطاعات التشغيلية والخدمية
-              </p>
+              <p className="text-2xl font-bold mb-4">{category.name}</p>
+
               <motion.div
                 className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
                 initial="hidden"
@@ -86,64 +96,12 @@ export default function Sectors() {
                   },
                 }}
               >
-                {operationalSectors.map((item, index) => (
+                {category.sectors.map((item, index) => (
                   <ServiceCard key={item.id} item={item} index={index} />
                 ))}
               </motion.div>
             </div>
-          )}
-          {securitySectors.length > 0 && (
-            <div
-              id="security-sectors"
-              className="flex flex-col items-center gap-5 "
-            >
-              <p className="text-2xl font-bold mb-4">القطاعات الأمنية</p>
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={{
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.15,
-                      delayChildren: 0.1,
-                    },
-                  },
-                }}
-              >
-                {securitySectors.map((item, index) => (
-                  <ServiceCard key={item.id} item={item} index={index} />
-                ))}
-              </motion.div>
-            </div>
-          )}
-          {healthSectors.length > 0 && (
-            <div
-              id="health-sectors"
-              className="flex flex-col items-center gap-5 "
-            >
-              <p className="text-2xl font-bold mb-4">القطاعات الصحية</p>
-              <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                variants={{
-                  visible: {
-                    transition: {
-                      staggerChildren: 0.15,
-                      delayChildren: 0.1,
-                    },
-                  },
-                }}
-              >
-                {healthSectors.map((item, index) => (
-                  <ServiceCard key={item.id} item={item} index={index} />
-                ))}
-              </motion.div>
-            </div>
-          )}
+          ))}
         </div>
 
         {/* Cards Grid with Stagger Animation */}

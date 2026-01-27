@@ -50,10 +50,13 @@ export default function SystemIntegration() {
           </div>
         </motion.div>
         <SimpleList items={data?.data?.types} />
+        <br />
+        <br />
         {data?.data?.types.map((feature, index) => (
           <div key={index} id={`section-${feature.id}`}>
             <FeatureImageSection
               title={feature?.title}
+              description={feature?.description}
               features={feature?.points}
               images={feature?.images}
               imageAlt="Security Camera"

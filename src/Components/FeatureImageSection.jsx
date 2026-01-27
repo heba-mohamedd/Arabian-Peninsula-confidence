@@ -44,6 +44,7 @@ const FeatureItem = ({ text, delay = 0 }) => (
  */
 export default function FeatureImageSection({
   title,
+  description,
   features = [],
   images = [],
   imageAlt = "Feature Image",
@@ -55,7 +56,7 @@ export default function FeatureImageSection({
 
   return (
     <div className="my-5">
-      <Header title={title} />
+      <Header title={title} description={description} />
       <div className="grid grid-cols-1 lg:grid-cols-3 items-center mt-5 gap-4 md:gap-0">
         {/* Right List */}
         <motion.div
