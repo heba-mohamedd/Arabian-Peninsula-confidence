@@ -68,7 +68,7 @@ export default function Footer() {
                     window.scrollTo(0, 0);
                   }}
                 >
-                  إدارة المرافق
+                  الخدمات
                 </li>
               </ul>
             </motion.div>
