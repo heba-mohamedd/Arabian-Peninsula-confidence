@@ -9,10 +9,8 @@ import { LuDot } from "react-icons/lu";
 const navLinks = [
   { name: "الرئيسية", href: "/" },
   { name: "القطاعات", href: "/sectors" },
-  { name: "القوائم المالية", href: "/financial" },
   { name: "الشـهـادات", href: "/certificates" },
-  { name: "خدمات تكامل الانظمة", href: "/system-integration" },
-  { name: "ادارة المرافق", href: "/facility-management" },
+  { name: "الخدمات", href: "/facility-management" },
   { name: "من نحن", href: "/about-us" },
   { name: "تواصل معنا", href: "/contact-us" },
 ];

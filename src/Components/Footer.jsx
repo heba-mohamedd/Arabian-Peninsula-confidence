@@ -70,24 +70,6 @@ export default function Footer() {
                 >
                   إدارة المرافق
                 </li>
-                <li
-                  className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => {
-                    navigate("/system-integration");
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  تكامل الأنظمة
-                </li>
-                <li
-                  className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => {
-                    navigate("/financial");
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  القوائم الماليه
-                </li>
               </ul>
             </motion.div>
 

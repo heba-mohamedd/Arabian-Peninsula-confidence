@@ -5,9 +5,7 @@ import { lazy } from "react";
 const Home = lazy(() => import("../Pages/Home"));
 const Sectors = lazy(() => import("../Pages/Sectors"));
 const SectorDetails = lazy(() => import("../Pages/SectorDetails"));
-const Financial = lazy(() => import("../Pages/Financial"));
 const Certificates = lazy(() => import("../Pages/Certificates"));
-const SystemIntegration = lazy(() => import("../Pages/SystemIntegration"));
 const FacilityManagement = lazy(() => import("../Pages/FacilityManagement"));
 const AboutUs = lazy(() => import("../Pages/AboutUs"));
 const ContactUs = lazy(() => import("../Pages/ContactUs"));
@@ -30,16 +28,8 @@ export const router = createBrowserRouter([
         element: <SectorDetails />,
       },
       {
-        path: "/financial",
-        element: <Financial />,
-      },
-      {
         path: "/certificates",
         element: <Certificates />,
-      },
-      {
-        path: "/system-integration",
-        element: <SystemIntegration />,
       },
       {
         path: "/facility-management",

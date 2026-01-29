@@ -23,7 +23,7 @@ export default function FacilityManagement() {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
     >
-      <Title title="إدارة المرافق" />
+      <Title title="الخدمات" />
 
       <div className="flex flex-col gap-5 justify-center items-center w-full max-w-7xl mx-auto px-6  my-10">
         {/* Intro */}
