@@ -7,7 +7,7 @@ import {
   useInView,
 } from "framer-motion";
 import { FaSquare } from "react-icons/fa";
-import bg from "../assets/statisticsBg.png";
+import bg from "../../assets/statisticsBg.png";
 
 const StatCard = React.memo(({ value, label, index }) => {
   const ref = React.useRef(null);
@@ -16,9 +16,9 @@ const StatCard = React.memo(({ value, label, index }) => {
   const rounded = useTransform(count, (latest) => Math.round(latest));
 
   const offsets = [
-    "md:-translate-y-10", // الأول فوق
-    "md:translate-y-0", // التاني في النص
-    "md:translate-y-10", // التالت تحت
+    "md:-translate-y-10",
+    "md:translate-y-0",
+    "md:translate-y-10",
   ];
 
   useEffect(() => {
@@ -62,7 +62,7 @@ const StatCard = React.memo(({ value, label, index }) => {
 
 StatCard.displayName = "StatCard";
 
-export default React.memo(function Statistics() {
+export function Statistics() {
   const stats = [
     {
       id: 1,
@@ -112,4 +112,4 @@ export default React.memo(function Statistics() {
       </div>
     </section>
   );
-});
+}

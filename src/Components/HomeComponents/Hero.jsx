@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import heroBg from "../assets/bms-main.jpg";
+import heroBg from "../../assets/bms-main.jpg";
 
 const textContainer = {
   hidden: {},
@@ -16,7 +16,7 @@ const textItem = {
   visible: { opacity: 1, y: 0 },
 };
 
-const Hero = React.memo(function Hero() {
+export function Hero() {
   return (
     <section className="relative h-80 sm:h-96 md:h-125 w-full overflow-hidden font-sans">
       <div
@@ -82,6 +82,4 @@ const Hero = React.memo(function Hero() {
       <div className="absolute inset-0 z-0 bg-blue-900/10 pointer-events-none"></div>
     </section>
   );
-});
-
-export default Hero;
+}

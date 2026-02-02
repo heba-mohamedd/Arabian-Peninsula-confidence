@@ -65,7 +65,7 @@ export default function Footer() {
                 <li
                   className="cursor-pointer hover:text-primary transition-colors"
                   onClick={() => {
-                    navigate("/facility-management");
+                    navigate("/services");
                     window.scrollTo(0, 0);
                   }}
                 >

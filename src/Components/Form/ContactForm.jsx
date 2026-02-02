@@ -7,7 +7,7 @@ import { VscSend } from "react-icons/vsc";
 import { useSendMessage } from "../../hooks/contactUs/useSendMessage.js";
 import { toast } from "react-toastify";
 
-export default function ContactForm() {
+export function ContactForm() {
   const {
     control,
     handleSubmit,

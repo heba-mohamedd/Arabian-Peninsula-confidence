@@ -16,7 +16,7 @@ const navLinks = [
   // { name: "القوائم المالية", href: "/financial" },
   { name: "الشـهـادات", href: "/certificates" },
   // { name: "خدمات تكامل الانظمة", href: "/system-integration" },
-  { name: "الخدمــات", href: "/facility-management" },
+  { name: "الخدمــات", href: "/services" },
   { name: "من نحن", href: "/about-us" },
   { name: "تواصل معنا", href: "/contact-us" },
   { name: "المدونه", href: "/blog" },

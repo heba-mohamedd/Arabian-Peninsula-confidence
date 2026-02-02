@@ -1,9 +1,9 @@
 import React from "react";
-import { blogs } from "../data/data.jsx";
-import Header from "./ui/Header.jsx";
-import BlogCard from "./BlogCard.jsx";
+import { blogs } from "../../data/data.jsx";
+import Header from "../ui/Header.jsx";
+import { BlogCard } from "../BlogComponents/BlogCard.jsx";
 
-const ArticleSection = () => {
+export const ArticleSection = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6">
       <Header
@@ -19,5 +19,3 @@ const ArticleSection = () => {
     </div>
   );
 };
-
-export default ArticleSection;

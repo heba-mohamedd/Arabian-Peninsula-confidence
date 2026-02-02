@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const { Meta } = Card;
 
-export default function BlogCard({ blog }) {
+export function BlogCard({ blog }) {
   const navigate = useNavigate();
   return (
     <motion.div

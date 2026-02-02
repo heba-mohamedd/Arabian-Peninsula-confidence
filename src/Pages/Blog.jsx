@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Title from "../Components/ui/Title.jsx";
 import { motion } from "framer-motion";
 import { Pagination, ConfigProvider } from "antd";
-import BlogCard from "../Components/BlogCard.jsx";
-import BlogSidebar from "../Components/BlogSidebar.jsx";
+import { BlogCard, BlogSidebar } from "../Components/BlogComponents";
 import { blogs } from "../data/data.jsx";
 
 // Mock data for categories

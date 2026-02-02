@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ServiceCard from "./ui/ServiceCard";
-import useSectorsQuery from "../hooks/queries/sectors/useSectorsQuery.js";
+import ServiceCard from "../ui/ServiceCard.jsx";
+import useSectorsQuery from "../../hooks/queries/sectors/useSectorsQuery.js";
 
 // Variants للـ Framer Motion
 const containerVariants = {
@@ -13,7 +13,7 @@ const containerVariants = {
   },
 };
 
-const OurService = React.memo(function OurService() {
+export const OurService = React.memo(function OurService() {
   const { data } = useSectorsQuery();
 
   return (
@@ -42,5 +42,3 @@ const OurService = React.memo(function OurService() {
     </section>
   );
 });
-
-export default OurService;

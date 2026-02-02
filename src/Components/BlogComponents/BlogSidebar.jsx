@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
-export default function BlogSidebar({ categories, featuredPosts }) {
+export function BlogSidebar({ categories, featuredPosts }) {
   const navigate = useNavigate();
   return (
     <motion.div

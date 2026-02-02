@@ -1,11 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Image from "../assets/Subtract.png";
-import { IoPlayCircleOutline } from "react-icons/io5";
-import ImageSkeleton from "./ui/skeletons/ImageSkeleton";
-import TextSkeleton from "./ui/skeletons/TextSkeleton";
+import ImageSkeleton from "../ui/skeletons/ImageSkeleton";
+import TextSkeleton from "../ui/skeletons/TextSkeleton";
 
-export default function About({ data }) {
+export function About({ data }) {
   const fadeInRight = {
     hidden: { opacity: 0, x: 50 },
     visible: { opacity: 1, x: 0, transition: { duration: 0.8 } },
@@ -93,30 +91,6 @@ export default function About({ data }) {
             alt="About Thibat"
             className="w-full h-auto object-cover rounded-2xl"
           />
-
-          {/* <div
-            className="
-      absolute
-      bottom-0 right-0
-     
-
-      w-14 h-14
-      sm:w-16 sm:h-16
-      lg:w-19 lg:h-19
-
-      bg-primary
-      rounded-full
-      flex items-center justify-center
-      cursor-pointer
-mx-4
-      hover:scale-110
-      active:scale-95
-      transition-all
-      shadow-lg
-    "
-          >
-            <IoPlayCircleOutline className="text-white" size={28} />
-          </div> */}
         </motion.div>
       </div>
     </section>

@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Header from "./ui/Header";
-import CardSkeleton from "./ui/skeletons/CardSkeleton";
-import { useClientsQuery } from "../hooks/queries/useClientsQuery.js";
+import Header from "../ui/Header.jsx";
+import CardSkeleton from "../ui/skeletons/CardSkeleton.jsx";
+import { useClientsQuery } from "../../hooks/queries/useClientsQuery.js";
 
-const Clients = React.memo(function Clients() {
+export function Clients() {
   const { data, isLoading } = useClientsQuery();
 
   const containerVariants = {
@@ -99,6 +99,4 @@ const Clients = React.memo(function Clients() {
       </div>
     </section>
   );
-});
-
-export default Clients;
+}

@@ -11,7 +11,7 @@ const newsletterSchema = yup.object().shape({
   email: yup.string().email("بريد غير صحيح"),
 });
 
-export default function Newsletter() {
+export function Newsletter() {
   const {
     control,
     handleSubmit,

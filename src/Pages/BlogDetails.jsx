@@ -3,7 +3,7 @@ import { blogs } from "../data/data.jsx";
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import Title from "../Components/ui/Title.jsx";
-import BlogSidebar from "../Components/BlogSidebar.jsx";
+import { BlogSidebar } from "../Components/BlogComponents";
 // Mock data for categories
 
 const categories = [

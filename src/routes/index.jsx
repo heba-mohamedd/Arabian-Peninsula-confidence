@@ -8,7 +8,7 @@ const SectorDetails = lazy(() => import("../Pages/SectorDetails"));
 // const Financial = lazy(() => import("../Pages/Financial"));
 const Certificates = lazy(() => import("../Pages/Certificates"));
 // const SystemIntegration = lazy(() => import("../Pages/SystemIntegration"));
-const FacilityManagement = lazy(() => import("../Pages/FacilityManagement"));
+const Services = lazy(() => import("../Pages/Services"));
 const AboutUs = lazy(() => import("../Pages/AboutUs"));
 const ContactUs = lazy(() => import("../Pages/ContactUs"));
 const Blog = lazy(() => import("../Pages/Blog"));
@@ -44,8 +44,8 @@ export const router = createBrowserRouter([
       //   element: <SystemIntegration />,
       // },
       {
-        path: "/facility-management",
-        element: <FacilityManagement />,
+        path: "/services",
+        element: <Services />,
       },
       {
         path: "/about-us",

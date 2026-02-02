@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Title from "../Components/ui/Title";
-import ContactForm from "../Components/Form/ContactForm.jsx";
+import { ContactForm, RequestQuoteForm, Newsletter } from "../Components";
 import Header from "./../Components/ui/Header";
-import RequestQuoteForm from "../Components/Form/RequestQuoteForm.jsx";
-import Newsletter from "../Components/Form/Newsletter.jsx";
 import backgroundContantInformation from "../assets/contactInformation.png";
 import { useLocation } from "react-router-dom";
 import { useContactData } from "../hooks/contactUs/useContactData.js";

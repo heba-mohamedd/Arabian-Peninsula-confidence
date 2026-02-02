@@ -8,7 +8,7 @@ import { useSendOffer } from "../../hooks/contactUs/useSendOffer.js";
 import { toast } from "react-toastify";
 import { useBudgetQuery } from "../../hooks/contactUs/useBudgetData.js";
 
-export default function RequestQuoteForm() {
+export function RequestQuoteForm() {
   const {
     control,
     handleSubmit,

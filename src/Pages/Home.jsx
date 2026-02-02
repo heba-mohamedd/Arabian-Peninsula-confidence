@@ -1,16 +1,21 @@
 import { Suspense } from "react";
-import Hero from "../Components/Hero";
-import About from "../Components/About";
-import OurService from "../Components/OurService";
-import Statistics from "../Components/Statistics";
+
 import RequestQuote from "../Components/RequestQuote";
-import Clients from "../Components/Clients";
+
 import PageLoader from "../Components/ui/PageLoader";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { useIslandQuery } from "../hooks/queries/useIslandQuery.js";
 import { useNavigate } from "react-router-dom";
-import ArticleSection from "../Components/ArticleSection.jsx";
-import ReviewSection from "../Components/ReviewSection.jsx";
+import {
+  Hero,
+  About,
+  OurService,
+  Statistics,
+  ServicesSection,
+  Clients,
+  ReviewSection,
+  ArticleSection,
+} from "../Components";
 
 export default function Home() {
   const { data, isLoading } = useIslandQuery();
@@ -33,6 +38,7 @@ export default function Home() {
 
       <OurService />
       <Statistics />
+      <ServicesSection />
       <div className="mt-10 w-full ">
         <RequestQuote
           onClick={handleClick}
