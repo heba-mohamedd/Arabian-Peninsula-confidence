@@ -1,6 +1,10 @@
 import React, { useState, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { GlobalOutlined, DownOutlined } from "@ant-design/icons";
+import {
+  GlobalOutlined,
+  DownOutlined,
+  DownloadOutlined,
+} from "@ant-design/icons";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import logo from "/Logo.png";
 import { LuDot } from "react-icons/lu";
@@ -15,6 +19,7 @@ const navLinks = [
   { name: "الخدمــات", href: "/facility-management" },
   { name: "من نحن", href: "/about-us" },
   { name: "تواصل معنا", href: "/contact-us" },
+  { name: "المدونه", href: "/blog" },
 ];
 
 const Navbar = () => {
@@ -59,6 +64,7 @@ const Navbar = () => {
       </ul>
 
       {/* Mobile Menu Button */}
+
       <button
         className="lg:hidden text-2xl text-dark-grey hover:text-primary transition-colors px-4"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

@@ -11,6 +11,8 @@ const Certificates = lazy(() => import("../Pages/Certificates"));
 const FacilityManagement = lazy(() => import("../Pages/FacilityManagement"));
 const AboutUs = lazy(() => import("../Pages/AboutUs"));
 const ContactUs = lazy(() => import("../Pages/ContactUs"));
+const Blog = lazy(() => import("../Pages/Blog"));
+const BlogDetails = lazy(() => import("../Pages/BlogDetails"));
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ export const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/blog/:id",
+        element: <BlogDetails />,
       },
     ],
   },

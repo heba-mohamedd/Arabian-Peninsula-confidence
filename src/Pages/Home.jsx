@@ -9,6 +9,8 @@ import PageLoader from "../Components/ui/PageLoader";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { useIslandQuery } from "../hooks/queries/useIslandQuery.js";
 import { useNavigate } from "react-router-dom";
+import ArticleSection from "../Components/ArticleSection.jsx";
+import ReviewSection from "../Components/ReviewSection.jsx";
 
 export default function Home() {
   const { data, isLoading } = useIslandQuery();
@@ -42,6 +44,8 @@ export default function Home() {
         />
       </div>
       <Clients />
+      <ReviewSection />
+      <ArticleSection />
     </section>
   );
 }

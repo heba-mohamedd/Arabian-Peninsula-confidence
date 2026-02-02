@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
+import DownloadFloatButton from "../Components/DownloadFloatButton";
 
 export default function Layout() {
   return (
@@ -13,6 +14,9 @@ export default function Layout() {
       </main>
 
       <Footer />
+
+      {/* Floating Download Button */}
+      <DownloadFloatButton />
     </div>
   );
 }

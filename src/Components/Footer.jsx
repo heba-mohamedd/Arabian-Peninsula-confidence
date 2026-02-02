@@ -4,6 +4,7 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { IoAlbumsOutline } from "react-icons/io5";
 import footerimage from "../assets/236627169d5a53522a3134e218015a0810d64acb.png";
 import { useNavigate } from "react-router-dom";
+// import vision2030 from "../assets/vision2030.jpg";
 
 export default function Footer() {
   const [isOpened, setIsOpend] = useState(true);
@@ -70,24 +71,6 @@ export default function Footer() {
                 >
                   الخدمــات{" "}
                 </li>
-                {/* <li
-                  className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => {
-                    navigate("/system-integration");
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  تكامل الأنظمة
-                </li>
-                <li
-                  className="cursor-pointer hover:text-primary transition-colors"
-                  onClick={() => {
-                    navigate("/financial");
-                    window.scrollTo(0, 0);
-                  }}
-                >
-                  القوائم الماليه
-                </li> */}
               </ul>
             </motion.div>
 
@@ -167,7 +150,13 @@ export default function Footer() {
 
       <div className="bg-primary py-3 md:py-4">
         <p className="text-center text-white text-xs sm:text-sm md:text-base px-4">
-          الالتزام بالأنظمة واللوائح المعتمدة في المملكة
+          جميع الحقوق محفوظة لدى ثقة الجزيرة العربية 2026 تصميم وبرمجة
+          <span
+            onClick={() => window.open("https://ahdafweb.com", "_blank")}
+            className="text-white px-2 cursor-pointer underline"
+          >
+            Ahdafweb.com
+          </span>
         </p>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import Newsletter from "../Components/Form/Newsletter.jsx";
 import backgroundContantInformation from "../assets/contactInformation.png";
 import { useLocation } from "react-router-dom";
 import { useContactData } from "../hooks/contactUs/useContactData.js";
+import MapIframe from "../Components/MapIframe.jsx";
 export default function ContactUs() {
   const { hash } = useLocation();
   const { data } = useContactData();
@@ -74,6 +75,8 @@ export default function ContactUs() {
           <RequestQuoteForm />
         </section>
       </div>
+
+      <MapIframe lat={24.7136} lng={46.6753} />
 
       <div className="w-full bg-neutral-200/20">
         <div
