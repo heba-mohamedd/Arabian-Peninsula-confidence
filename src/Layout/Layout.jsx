@@ -15,8 +15,7 @@ export default function Layout() {
 
       <Footer />
 
-      {/* Floating Download Button */}
-      <DownloadFloatButton />
+      {/* <DownloadFloatButton /> */}
     </div>
   );
 }

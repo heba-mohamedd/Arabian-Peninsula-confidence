@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function MapIframe({ lat, lng, zoom = 15 }) {
   const src = `https://www.google.com/maps?q=${lat},${lng}&z=${zoom}&output=embed`;
 

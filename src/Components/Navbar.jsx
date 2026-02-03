@@ -8,14 +8,13 @@ import {
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import logo from "/Logo.png";
 import { LuDot } from "react-icons/lu";
+import { BsDownload } from "react-icons/bs";
 
 // Navigation links data
 const navLinks = [
   { name: "الرئيسية", href: "/" },
   { name: "القطاعات", href: "/sectors" },
-  // { name: "القوائم المالية", href: "/financial" },
   { name: "الشـهـادات", href: "/certificates" },
-  // { name: "خدمات تكامل الانظمة", href: "/system-integration" },
   { name: "الخدمــات", href: "/services" },
   { name: "من نحن", href: "/about-us" },
   { name: "تواصل معنا", href: "/contact-us" },
@@ -61,6 +60,14 @@ const Navbar = () => {
             </NavLink>
           </li>
         ))}
+        <a
+          className="flex items-center gap-2 underline text-primary"
+          href="/company-profile.pdf"
+          download
+        >
+          <BsDownload />
+          تعرف على الشركه
+        </a>
       </ul>
 
       {/* Mobile Menu Button */}
