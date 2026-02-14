@@ -6,6 +6,7 @@ import PageLoader from "../Components/ui/PageLoader";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { useIslandQuery } from "../hooks/queries/useIslandQuery.js";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   Hero,
   About,
@@ -20,6 +21,7 @@ import {
 export default function Home() {
   const { data, isLoading } = useIslandQuery();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   function handleClick() {
     navigate("/contact-us#order");
@@ -42,10 +44,9 @@ export default function Home() {
       <div className="mt-10 w-full ">
         <RequestQuote
           onClick={handleClick}
-          title="تقديم طلب عرض سعر"
-          description={`من خلال نموذج طلب عرض السعر، يمكنكم مشاركة متطلباتكم الفنية والتشغيلية
-        \n ليقوم فريقنا بدراستها وإعداد عرض سعر متكامل`}
-          buttonText="طلب عرض السعر"
+          title={t("Request a Quote")}
+          description={t("Request Quote Description")}
+          buttonText={t("Request Quote Button")}
           buttonIcon={<MdOutlinePhoneInTalk size={20} />}
         />
       </div>

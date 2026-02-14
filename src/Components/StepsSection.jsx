@@ -66,7 +66,7 @@ export default function StepsSection({ steps = [] }) {
                 description={step.description}
               >
                 {step.items && (
-                  <ul className="text-right list-disc list-outside mt-2">
+                  <ul className="text-start list-disc list-outside mt-2">
                     {step.items.map((item, itemIndex) => (
                       <li key={itemIndex}>{item}</li>
                     ))}

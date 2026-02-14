@@ -10,3 +10,13 @@ export const getClientsData = async () => {
   const response = await axiosInstance.get("/api/clients");
   return response.data;
 };
+
+export const getReviewsData = async () => {
+  const response = await axiosInstance.get("/api/reviews");
+  return response.data;
+};
+
+export const getSettingsData = async () => {
+  const response = await axiosInstance.get("/api/settings");
+  return response.data;
+};

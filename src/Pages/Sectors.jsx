@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import Title from "../Components/ui/Title";
-import Header from "../Components/ui/Header";
 import ServiceCard from "../Components/ui/ServiceCard";
 import PageLoader from "../Components/ui/PageLoader";
-// import { service } from "../data/data";
 import ModernProcess from "../Components/ModernProcess.jsx";
 import useSectorsQuery from "../hooks/queries/sectors/useSectorsQuery.js";
+import bgImage from "../assets/bms-main.jpg"; // Using existing asset
+import { useTranslation } from "react-i18next";
 
 export default function Sectors() {
   const { data, isLoading } = useSectorsQuery();
   const location = useLocation();
+  const { t } = useTranslation();
 
   const groupedSectors = React.useMemo(() => {
     if (!data?.data) return {};
@@ -45,76 +45,113 @@ export default function Sectors() {
     }
   }, [location.hash, isLoading]);
 
-  // Show page loader while data is loading
   if (isLoading) {
     return <PageLoader />;
   }
 
   return (
-    <section className="flex flex-col items-center justify-center text-center">
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <Title title="القطاعات" />
-      </motion.div>
-
-      <div className="container mx-auto max-w-7xl flex flex-col items-center gap-12 my-6">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
+    <div className="min-h-screen bg-gray-50">
+      {/* 1. Page Hero Section */}
+      <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat fixed-bg"
+          style={{ backgroundImage: `url(${bgImage})` }}
         >
-          <Header
-            title="قطاعات أعمالنا"
-            description="نعمل عبر مجموعة من القطاعات الحيوية من خلال نموذج تشغيلي موحد يضمن الكفاءة والاستدامة في جميع أنشطتنا"
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-50/90 to-transparent"></div>
+        </div>
+
+        <motion.div
+          className="relative z-10 text-center px-4 max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
+            {t("Sectors")} <span className="text-primary">{t("Our Business")}</span>
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto drop-shadow-md">
+            {t("Sectors Page Description")}
+          </p>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="w-24 h-1 bg-primary mx-auto mt-8 rounded-full"
           />
         </motion.div>
+      </section>
 
-        <div className="flex flex-col items-center gap-12 ">
-          {Object.values(groupedSectors).map((category) => (
+      {/* 2. Sectors Grid by Category */}
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10 -mt-20">
+
+        <div className="flex flex-col gap-20">
+          {Object.values(groupedSectors).map((category, catIndex) => (
             <div
               key={category.id}
               id={`category-${category.id}`}
-              className="flex flex-col items-center gap-5"
+              className="flex flex-col gap-8"
             >
-              <p className="text-2xl font-bold mb-4">{category.name}</p>
+              {/* Category Header */}
+              <motion.div
+                className="flex items-center gap-4 mb-4"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <div className="h-10 w-1 bg-primary rounded-full"></div>
+                <h2 className="text-3xl md:text-4xl font-bold text-secondary">{category.name}</h2>
+              </motion.div>
 
               <motion.div
-                className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full px-4"
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
+                viewport={{ once: true, margin: "-50px" }}
                 variants={{
                   visible: {
                     transition: {
-                      staggerChildren: 0.15,
-                      delayChildren: 0.1,
+                      staggerChildren: 0.1,
                     },
                   },
                 }}
               >
                 {category.sectors.map((item, index) => (
-                  <ServiceCard key={item.id} item={item} index={index} />
+                  <motion.div
+                    key={item?.id}
+                    variants={{
+                      hidden: { opacity: 0, y: 30 },
+                      visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+                    }}
+                  >
+                    <ServiceCard item={item} />
+                  </motion.div>
                 ))}
               </motion.div>
+
+              {/* Divider between categories (except last) */}
+              {catIndex < Object.values(groupedSectors).length - 1 && (
+                <div className="w-full h-px bg-gray-200 mt-12"></div>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Cards Grid with Stagger Animation */}
-
+        {/* 3. Modern Process Section */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7 }}
+          className="mt-24"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <ModernProcess />
         </motion.div>
       </div>
-    </section>
+
+      {/* Background Decor */}
+      <div className="fixed top-1/3 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 pointer-events-none"></div>
+      <div className="fixed bottom-0 left-0 w-[600px] h-[600px] bg-secondary/5 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+    </div>
   );
 }

@@ -1,17 +1,20 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, ConfigProvider } from "antd";
-import { MdOutlineMailOutline } from "react-icons/md"; // أيقونة البريد
+import { MdOutlineMailOutline } from "react-icons/md";
 import PrimaryButton from "./../ui/PrimaryButton";
 import { useEnterEmailQuery } from "../../hooks/contactUs/useEnterEmailQuery";
 import * as yup from "yup";
 import { toast } from "react-toastify";
-
-const newsletterSchema = yup.object().shape({
-  email: yup.string().email("بريد غير صحيح"),
-});
+import { useTranslation } from "react-i18next";
 
 export function Newsletter() {
+  const { t } = useTranslation();
+
+  const newsletterSchema = yup.object().shape({
+    email: yup.string().email(t("Invalid Email")),
+  });
+
   const {
     control,
     handleSubmit,
@@ -30,13 +33,12 @@ export function Newsletter() {
   const onSubmit = (data) => {
     enterEmail(data.email, {
       onSuccess: () => {
-        toast.success("تــم الارســـال بنجاح");
+        toast.success(t("Message Sent Success"));
         reset();
       },
       onError: (error) => {
         const serverMessage =
-          error?.response?.data?.message ||
-          "حــدث خطأ اثناء الارسال حاول مرة اخرى";
+          error?.response?.data?.message || t("Message Sent Error");
         toast.error(serverMessage);
       },
     });
@@ -54,10 +56,9 @@ export function Newsletter() {
       <section
         className=" relative
     bg-secondary
-    py-12 px-6 mx-4 w-full
+    py-12 px-6 w-full
     overflow-hidden
 "
-        dir="rtl"
       >
         <div
           className="
@@ -71,19 +72,17 @@ export function Newsletter() {
     "
         />
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-          {/* النصوص جهة اليمين */}
-          <div className="text-white text-right">
+          {/* Text Side */}
+          <div className="text-white text-start">
             <p className="text-2xl md:text-3xl font-bold mb-2">
-              ابقَ على اطلاع
+              {t("Stay Updated")}
             </p>
             <p className="text-light-grey text-sm md:text-base leading-relaxed">
-              اشترك ليصلك آخر المستجدات المتعلقة بخدماتنا،{" "}
-              <br className="hidden md:block" />
-              المشاريع، والتحديثات التشغيلية ذات الصلة.
+              {t("Newsletter Description")}
             </p>
           </div>
 
-          {/* حقل الإدخال والزر */}
+          {/* Input & Button */}
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="w-full md:w-auto flex flex-col gap-2"
@@ -97,10 +96,10 @@ export function Newsletter() {
                     <Input
                       {...field}
                       variant="borderless"
-                      placeholder="ادخل بريدك الالكتروني"
+                      placeholder={t("Enter Email Placeholder")}
                       status={error ? "error" : ""}
                       prefix={
-                        <MdOutlineMailOutline className="text-light-grey text-xl ml-2" />
+                        <MdOutlineMailOutline className="text-light-grey text-xl mx-2" />
                       }
                       className="custom-input bg-transparent [&_input]:!text-white w-full md:w-[300px] [&_input]:placeholder:!text-gray-400 text-white"
                     />
@@ -108,14 +107,14 @@ export function Newsletter() {
                 )}
               />
               <PrimaryButton
-                text="ارسال"
+                text={t("Send")}
                 htmlType="submit"
                 loading={isPending}
               />
             </div>
             {/* Error Message */}
             {errors.email && (
-              <p className="text-red-500 text-sm text-right px-2 animate-pulse">
+              <p className="text-red-500 text-sm text-start px-2 animate-pulse">
                 {errors.email.message}
               </p>
             )}

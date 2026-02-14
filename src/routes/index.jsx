@@ -11,6 +11,8 @@ const AboutUs = lazy(() => import("../Pages/AboutUs"));
 const ContactUs = lazy(() => import("../Pages/ContactUs"));
 const Blog = lazy(() => import("../Pages/Blog"));
 const BlogDetails = lazy(() => import("../Pages/BlogDetails"));
+const CompanyProfile = lazy(() => import("../Pages/CompanyProfile"));
+const NotFound = lazy(() => import("../Pages/NotFound"));
 
 const router = createBrowserRouter([
   {
@@ -21,20 +23,19 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
+      // ... existing routes
       {
         path: "/sectors",
         element: <Sectors />,
       },
       {
-        path: "/sectorDetails/:id",
+        path: "/sectors/:id",
         element: <SectorDetails />,
       },
-
       {
         path: "/certificates",
         element: <Certificates />,
       },
-
       {
         path: "/services",
         element: <Services />,
@@ -54,6 +55,15 @@ const router = createBrowserRouter([
       {
         path: "/blog/:id",
         element: <BlogDetails />,
+      },
+
+      {
+        path: "/company-profile",
+        element: <CompanyProfile />,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
     ],
   },

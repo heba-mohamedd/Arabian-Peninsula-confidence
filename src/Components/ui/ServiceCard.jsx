@@ -1,100 +1,117 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { Card } from "antd";
-import { IoMdArrowDropdown } from "react-icons/io";
+import React, { useRef, useState } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-const { Meta } = Card;
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
-};
+import { HiArrowNarrowLeft } from "react-icons/hi";
 
 const ServiceCard = React.memo(({ item }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const ref = useRef(null);
+  const [hover, setHover] = useState(false);
+
+  // Mouse position state
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  // Smooth spring animation for tilt
+  const mouseX = useSpring(x, { stiffness: 300, damping: 30 });
+  const mouseY = useSpring(y, { stiffness: 300, damping: 30 });
+
+  // Calculating rotation
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], ["15deg", "-15deg"]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-15deg", "15deg"]);
+
+  // Shine effect moving opposite to mouse
+  const shineX = useTransform(mouseX, [-0.5, 0.5], ["0%", "100%"]);
+  const shineY = useTransform(mouseY, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+
+    // Calculate normalized position (-0.5 to 0.5)
+    const width = rect.width;
+    const height = rect.height;
+
+    // Position relative to center
+    const mouseXRel = (e.clientX - rect.left) / width - 0.5;
+    const mouseYRel = (e.clientY - rect.top) / height - 0.5;
+
+    x.set(mouseXRel);
+    y.set(mouseYRel);
+  };
+
+  const handleMouseLeave = () => {
+    setHover(false);
+    x.set(0);
+    y.set(0);
+  };
 
   return (
-    <Link to={`/SectorDetails/${item?.id}`}>
+    <Link to={`/sectors/${item?.id}`} className="block h-full perspective-1000">
       <motion.div
-        variants={cardVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
-        whileHover={{
-          y: -12,
-          scale: 1.03,
-          transition: { duration: 0.3, ease: "easeOut" },
+        ref={ref}
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          rotateX,
+          rotateY,
+          transformStyle: "preserve-3d",
         }}
-        whileTap={{ scale: 0.97 }}
-        className="w-full h-full relative"
-        onHoverStart={() => setIsHovered(true)}
-        onHoverEnd={() => setIsHovered(false)}
+        className="relative h-[400px] w-full rounded-2xl transition-shadow duration-500 ease-out hover:shadow-2xl hover:shadow-primary/20"
       >
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent rounded-lg z-0 opacity-0"
-          animate={{ opacity: isHovered ? 1 : 0 }}
-          transition={{ duration: 0.3 }}
-        />
-
-        <Card
-          hoverable
-          cover={
-            <div className="overflow-hidden relative h-80">
-              <motion.img
-                draggable={false}
-                alt={item?.name}
-                src={item?.image_url}
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  width: "100%",
-                  height: "100%",
-                }}
-                loading="lazy"
-                animate={{
-                  scale: isHovered ? 1.05 : 1,
-                }}
-              />
-            </div>
-          }
-          className="text-center h-full relative overflow-hidden"
-        >
-          <div className="flex flex-col items-center justify-center gap-2">
-            <Meta
-              title={<span className="text-sm md:text-base">{item?.name}</span>}
+        <div className="absolute inset-0 rounded-2xl overflow-hidden bg-gray-900 border border-white/10">
+          {/* Image Background */}
+          <div className="absolute inset-0 h-full w-full">
+            <img
+              src={item?.image_url}
+              alt={item?.name}
+              className="w-full h-full object-cover transition-transform duration-700 ease-out"
+              style={{ scale: hover ? 1.15 : 1 }}
+              loading="lazy"
             />
-            <motion.div
-              animate={{
-                y: isHovered ? [0, -8, 0] : 0,
-                rotate: isHovered ? [0, 5, -5, 0] : 0,
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: isHovered ? Infinity : 0,
-                repeatDelay: 0.2,
-              }}
-            >
-              <IoMdArrowDropdown size={35} color="#009640" />
-            </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
           </div>
 
+          {/* Shine/Glare Effect */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-            initial={{ x: "-100%" }}
-            animate={{ x: isHovered ? "100%" : "-100%" }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="absolute inset-0 z-10 opacity-30 pointer-events-none bg-gradient-to-tr from-transparent via-white to-transparent"
+            style={{
+              background: `radial-gradient(circle at ${shineX} ${shineY}, rgba(255,255,255,0.2) 0%, transparent 50%)`,
+            }}
           />
-        </Card>
+
+          {/* Floating Content Layer (Offset for 3D depth) */}
+          <motion.div
+            className="absolute inset-0 p-8 flex flex-col justify-end z-20"
+            style={{ translateZ: "40px" }}
+          >
+            <div className="transform translate-z-20">
+              <h3 className="text-2xl font-bold text-white mb-3 drop-shadow-lg">
+                {item?.name}
+              </h3>
+
+              {/* Animated Divider */}
+              <motion.div
+                className="h-1 bg-primary rounded-full mb-4 shadow-lg shadow-primary/50"
+                animate={{ width: hover ? "100%" : "3rem" }}
+                transition={{ duration: 0.4 }}
+              />
+
+              <motion.div
+                className="flex items-center gap-2 overflow-hidden"
+                animate={{
+                  opacity: hover ? 1 : 0.7,
+                  y: hover ? 0 : 5,
+                }}
+              >
+                <span className="font-medium text-sm text-gray-200">
+                  استكشف القطاع
+                </span>
+                <HiArrowNarrowLeft className="text-xl text-primary animate-pulse" />
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </motion.div>
     </Link>
   );

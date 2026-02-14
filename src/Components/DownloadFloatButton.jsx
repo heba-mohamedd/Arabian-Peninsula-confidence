@@ -18,8 +18,7 @@ export default function DownloadFloatButton() {
       }}
     >
       <motion.a
-        href="/company-profile.pdf"
-        download
+        href="/company-profile"
         className="relative block"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

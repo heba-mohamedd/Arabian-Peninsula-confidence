@@ -6,13 +6,17 @@ import ReactQueryProvider from "./providers/ReactQueryProvider.jsx";
 import { ToastContainer } from "react-toastify";
 import PageLoader from "./Components/ui/PageLoader.jsx";
 
+import { HelmetProvider } from "react-helmet-async";
+
 function App() {
   return (
     <ReactQueryProvider>
-      <Suspense fallback={<PageLoader />}>
-        <RouterProvider router={router} />
-        <ToastContainer />
-      </Suspense>
+      <HelmetProvider>
+        <Suspense fallback={<PageLoader />}>
+          <RouterProvider router={router} />
+          <ToastContainer />
+        </Suspense>
+      </HelmetProvider>
     </ReactQueryProvider>
   );
 }

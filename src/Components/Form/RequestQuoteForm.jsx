@@ -1,14 +1,16 @@
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Input, Select, ConfigProvider } from "antd";
-import { requestQuoteSchema } from "../../Schema/requestQuoteSchema.jsx"; // تأكد من إنشاء السكيما المناسبة
+import { requestQuoteSchema } from "../../Schema/requestQuoteSchema.jsx";
 import { VscSend } from "react-icons/vsc";
 import PrimaryButton from "../ui/PrimaryButton.jsx";
 import { useSendOffer } from "../../hooks/contactUs/useSendOffer.js";
 import { toast } from "react-toastify";
 import { useBudgetQuery } from "../../hooks/contactUs/useBudgetData.js";
+import { useTranslation } from "react-i18next";
 
 export function RequestQuoteForm() {
+  const { t } = useTranslation();
   const {
     control,
     handleSubmit,
@@ -39,11 +41,11 @@ export function RequestQuoteForm() {
   const onSubmit = (data) => {
     sendOffer(data, {
       onSuccess: () => {
-        toast.success("تــم الارســـال بنجاح");
+        toast.success(t("Message Sent Success"));
         reset();
       },
       onError: () => {
-        toast.error("حــدث خطأ اثناء الارسال حاول مرة اخرى ");
+        toast.error(t("Message Sent Error"));
       },
     });
   };
@@ -61,13 +63,12 @@ export function RequestQuoteForm() {
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-right w-full p-6"
-        dir="rtl"
+        className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6 text-start w-full p-6"
       >
-        {/* الاسم بالكامل */}
+        {/* Full Name */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            الاسم بالكامل
+            {t("Full Name")}
           </label>
           <Controller
             name="fullName"
@@ -79,10 +80,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* اسم الجهة / الشراكة */}
+        {/* Company Name */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            اسم الجهة / الشراكة
+            {t("Entity Name Label")}
           </label>
           <Controller
             name="companyName"
@@ -94,10 +95,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* رقم الهاتف */}
+        {/* Phone */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            رقم الهاتف
+            {t("Phone Number Label")}
           </label>
           <Controller
             name="phone"
@@ -109,10 +110,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* البريد الإلكتروني */}
+        {/* Email */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            البريد الالكتروني
+            {t("Email Label")}
           </label>
           <Controller
             name="email"
@@ -124,10 +125,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* نوع الخدمة */}
+        {/* Service Type */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            نوع الخدمة
+            {t("Service Type Label")}
           </label>
           <Controller
             name="serviceType"
@@ -137,9 +138,9 @@ export function RequestQuoteForm() {
                 {...field}
                 size="large"
                 options={[
-                  { value: "financial", label: "القوائم الماليه" },
-                  { value: "facility", label: "اداره المرافق" },
-                  { value: "integration", label: "تكامل الانظمه" },
+                  { value: "financial", label: t("Financial Statements") },
+                  { value: "facility", label: t("Facility Management Service") },
+                  { value: "integration", label: t("System Integration") },
                 ]}
               />
             )}
@@ -149,10 +150,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* الميزانية التقديرية */}
+        {/* Budget */}
         <div className="flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            الميزانية التقديرية
+            {t("Estimated Budget Label")}
           </label>
           <Controller
             name="budget"
@@ -161,7 +162,7 @@ export function RequestQuoteForm() {
               <Select
                 {...field}
                 size="large"
-                placeholder="اختر الميزانية"
+                placeholder={t("Choose Budget")}
                 loading={isLoading}
                 options={budgetOptions}
               />
@@ -172,10 +173,10 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* وصف المشروع */}
+        {/* Project Description */}
         <div className="md:col-span-2 flex flex-col gap-2">
           <label className="text-gray-700 font-medium text-sm">
-            وصف المشروع الخاص بك
+            {t("Project Description Label")}
           </label>
           <Controller
             name="projectDescription"
@@ -196,13 +197,13 @@ export function RequestQuoteForm() {
           )}
         </div>
 
-        {/* زر الإرسال */}
+        {/* Submit */}
         <div className="md:col-span-2 flex justify-center mt-4">
           <PrimaryButton
-            text="ارسال طلب السعر"
+            text={t("Send Quote Request")}
             htmlType="submit"
             loading={isPending}
-            icon={<VscSend size={20} className="rotate-180" />}
+            icon={<VscSend size={20} className="rtl:rotate-180" />}
           />
         </div>
       </form>

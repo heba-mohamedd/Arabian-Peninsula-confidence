@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Thumbs, EffectCoverflow, Autoplay } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import "swiper/css/effect-coverflow";
 
 export default function ImageGallerySwiper({ images }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -16,7 +17,7 @@ export default function ImageGallerySwiper({ images }) {
   }
 
   // Enable loop only if we have enough slides
-  const shouldLoop = images.length > 5;
+  const shouldLoop = images.length > 2;
 
   return (
     <div className="w-full max-w-5xl mx-auto my-8">
@@ -25,16 +26,31 @@ export default function ImageGallerySwiper({ images }) {
         style={{
           "--swiper-navigation-color": "#00963F",
           "--swiper-pagination-color": "#00963F",
-          height: "384px", // Fixed height for main swiper
+          height: "400px", // Fixed height for main swiper
+        }}
+        effect={'coverflow'}
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView={'auto'}
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
         }}
         loop={shouldLoop}
+        autoplay={{
+          delay: 3000,
+          disableOnInteraction: false,
+        }}
         spaceBetween={10}
         navigation={true}
         thumbs={{
           swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null,
         }}
-        modules={[FreeMode, Navigation, Thumbs]}
-        className="rounded-xl overflow-hidden mb-4"
+        modules={[FreeMode, Navigation, Thumbs, EffectCoverflow, Autoplay]}
+        className="rounded-2xl overflow-hidden mb-4 shadow-2xl"
       >
         {images.map((imageUrl, index) => (
           <SwiperSlide key={`main-${index}`}>

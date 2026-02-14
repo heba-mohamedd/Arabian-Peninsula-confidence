@@ -1,11 +1,18 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Header from "../ui/Header.jsx";
-import CardSkeleton from "../ui/skeletons/CardSkeleton.jsx";
 import { useClientsQuery } from "../../hooks/queries/useClientsQuery.js";
+import { useSettingsQuery } from "../../hooks/queries/useSettingsQuery"; // Import settings
 
 export function Clients() {
   const { data, isLoading } = useClientsQuery();
+  const { data: settingsData } = useSettingsQuery(); // Fetch settings
+  const settings = settingsData?.data || {};
+
+  const sectionTitle = settings["clients_section_title"] || "عملاؤنا";
+  const sectionDesc =
+    settings["clients_section_description"] ||
+    "فخورون بالشراكة مع مجموعة من الجهات الحكومية والخاصة، في مختلف القطاعات.";
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -58,10 +65,7 @@ export function Clients() {
             viewport={{ once: true }}
             className="flex flex-col justify-center items-center mb-12"
           >
-            <Header
-              title="عملاؤنا"
-              description="فخورون بالشراكة مع مجموعة من الجهات الحكومية والخاصة، في مختلف القطاعات."
-            />
+            <Header title={sectionTitle} description={sectionDesc} />
           </motion.div>
         )}
 
@@ -71,28 +75,22 @@ export function Clients() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6"
         >
           {data?.data.map((item, index) => (
             <motion.div
               key={item.id}
               variants={itemVariants}
-              className={`
-                flex items-center justify-center rounded-lg p-4   
-                ${index >= 4 ? "lg:translate-x-10" : ""}
-              `}
+              className="group bg-white rounded-xl p-6 shadow-sm hover:shadow-lg border border-gray-100 flex items-center justify-center transition-all duration-300 transform hover:-translate-y-1"
             >
-              <img
-                src={item.logo_url}
-                alt={`logo-${index}`}
-                loading="lazy"
-                style={{
-                  width: "200px",
-                  height: "100px",
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-              />
+              <div className="w-full h-24 relative flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 opacity-60 hover:opacity-100">
+                <img
+                  src={item.logo_url}
+                  alt={`logo-${index}`}
+                  loading="lazy"
+                  className="max-w-full max-h-full object-contain"
+                />
+              </div>
             </motion.div>
           ))}
         </motion.div>

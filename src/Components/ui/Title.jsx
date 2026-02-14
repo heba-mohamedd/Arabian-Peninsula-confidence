@@ -2,9 +2,11 @@ import React from "react";
 import { MdOutlineArrowLeft } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import frame7 from "../../assets/Frame 7.png";
+import { useTranslation } from "react-i18next";
 
 export default function Title({ title }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="relative w-full ">
@@ -16,7 +18,7 @@ export default function Title({ title }) {
             onClick={() => navigate("/")}
             className="text-dark-grey border bg-transparent border-none p-0 cursor-pointer text-lg md:text-xl"
           >
-            الرئيسية
+            {t("Home")}
           </button>
 
           <MdOutlineArrowLeft size={35} color="#00963F" />
